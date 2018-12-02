@@ -4,10 +4,13 @@
  */
 package com.srhheidelberg.sdp.dap.model.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,156 +19,76 @@ public class Doctor_User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer DoctorUser_Id;
-	private String LastName;
-	private String FirstName;
-	private String AddressLine1;
-	private String AddressLine2;
-	private Integer PostalCode;
-	private Integer Contact;
-	private Integer DoctorType_Id;
-	private String Experience;
-	private Integer Fees;
-	private String Gender;
-	private String Password;
-	private Integer OverallRating; 
-	private Boolean Sunday;
-	private Boolean Monday; 
-	private Boolean Tuesday ;
-	private Boolean Wednesday;
-	private Boolean Thursday ;
-	private Boolean Friday;
-	private Boolean Saturday;
+	@Column(name="DoctorUser_Id")
+	private Integer doctorUserId;
 	
-	public int getDoctorUser_Id() {
-		return DoctorUser_Id;
-	}
-	public void setDoctorUser_Id(int doctorUser_Id) {
-		DoctorUser_Id = doctorUser_Id;
-	}
-	public String getLastName() {
-		return LastName;
-	}
-	public void setLastName(String lastName) {
-		LastName = lastName;
-	}
-	public String getFirstName() {
-		return FirstName;
-	}
-	public void setFirstName(String firstName) {
-		FirstName = firstName;
-	}
-	public String getAddressLine1() {
-		return AddressLine1;
-	}
-	public void setAddressLine1(String addressLine1) {
-		AddressLine1 = addressLine1;
-	}
-	public String getAddressLine2() {
-		return AddressLine2;
-	}
-	public void setAddressLine2(String addressLine2) {
-		AddressLine2 = addressLine2;
-	}
-	public Integer getPostalCode() {
-		return PostalCode;
-	}
-	public void setPostalCode(Integer postalCode) {
-		PostalCode = postalCode;
-	}
-	public Integer getContact() {
-		return Contact;
-	}
-	public void setContact(Integer contact) {
-		Contact = contact;
-	}
-	public int getDoctorType_Id() {
-		return DoctorType_Id;
-	}
-	public void setDoctorType_Id(int doctorType_Id) {
-		DoctorType_Id = doctorType_Id;
-	}
-	public String getExperience() {
-		return Experience;
-	}
-	public void setExperience(String experience) {
-		Experience = experience;
-	}
-	public int getFees() {
-		return Fees;
-	}
-	public void setFees(int fees) {
-		Fees = fees;
-	}
-	public String getGender() {
-		return Gender;
-	}
-	public void setGender(String gender) {
-		Gender = gender;
-	}
-	public String getPassword() {
-		return Password;
-	}
-	public void setPassword(String password) {
-		Password = password;
-	}
-	public int getOverallRating() {
-		return OverallRating;
-	}
-	public void setOverallRating(int overallRating) {
-		OverallRating = overallRating;
-	}
-	public Boolean getSunday() {
-		return Sunday;
-	}
-	public void setSunday(Boolean sunday) {
-		Sunday = sunday;
-	}
-	public Boolean getMonday() {
-		return Monday;
-	}
-	public void setMonday(Boolean monday) {
-		Monday = monday;
-	}
-	public Boolean getTuesday() {
-		return Tuesday;
-	}
-	public void setTuesday(Boolean tuesday) {
-		Tuesday = tuesday;
-	}
-	public Boolean getWednesday() {
-		return Wednesday;
-	}
-	public void setWednesday(Boolean wednesday) {
-		Wednesday = wednesday;
-	}
-	public Boolean getThursday() {
-		return Thursday;
-	}
-	public void setThursday(Boolean thursday) {
-		Thursday = thursday;
-	}
-	public Boolean getFriday() {
-		return Friday;
-	}
-	public void setFriday(Boolean friday) {
-		Friday = friday;
-	}
-	public Boolean getSaturday() {
-		return Saturday;
-	}
-	public void setSaturday(Boolean saturday) {
-		Saturday = saturday;
-	}
+	@Column(name="LastName")
+	private String lastName;
+
+	@Column(name="FirstName")
+	private String firstName;
+
+	@Column(name="AddressLine1")
+	private String addressLine1;
+
+	@Column(name="AddressLine2")
+	private String addressLine2;
+
+	@Column(name="PostalCode")
+	private Integer postalCode;
+
+	@Column(name="Contact")
+	private Integer contact;
+	
+	@OneToOne
+    @JoinColumn(name = "doctorTypeId")
+	@Column(name="DoctorType_Id")
+	private Integer doctorTypeId;
+	
+	@Column(name="Experience")
+	private String experience;
+	
+	@Column(name="Fees")
+	private Integer fees;
+	
+	@Column(name="Gender")
+	private String gender;
+	
+	@Column(name="Password")
+	private String password;
+	
+	@Column(name="OverallRating")
+	private Integer overallRating;
+	
+	@Column(name="Sunday")
+	private Boolean sunday;
+	
+	@Column(name="Monday")
+	private Boolean monday;
+	
+	@Column(name="Tuesday")
+	private Boolean tuesday ;
+	
+	@Column(name="Wednesday")
+	private Boolean wednesday;
+	
+	@Column(name="thursday")
+	private Boolean Thursday ;
+	
+	@Column(name="Friday")
+	private Boolean friday;
+
+	@Column(name="Saturday")
+	private Boolean saturday;
 	
 	@Override
 	public String toString() {
-		return "DoctorUser [DoctorUser_Id=" + DoctorUser_Id + ", LastName=" + LastName + ", FirstName=" + FirstName
-				+ ", AddressLine1=" + AddressLine1 + ", AddressLine2=" + AddressLine2 + ", PostalCode=" + PostalCode
-				+ ", Contact=" + Contact + ", DoctorType_Id=" + DoctorType_Id + ", Experience=" + Experience + ", Fees="
-				+ Fees + ", Gender=" + Gender + ", Password=" + Password + ", OverallRating=" + OverallRating
-				+ ", Sunday=" + Sunday + ", Monday=" + Monday + ", Tuesday=" + Tuesday + ", Wednesday=" + Wednesday
-				+ ", Thursday=" + Thursday + ", Friday=" + Friday + ", Saturday=" + Saturday + "]";
+		return "DoctorUser [DoctorUser_Id=" + doctorUserId + ", LastName=" + lastName + ", FirstName=" + firstName
+				+ ", AddressLine1=" + addressLine1 + ", AddressLine2=" + addressLine2 + ", PostalCode=" + postalCode
+				+ ", Contact=" + contact + ", DoctorType_Id=" + doctorTypeId + ", Experience=" + experience + ", Fees="
+				+ fees + ", Gender=" + gender + ", Password=" + password + ", OverallRating=" + overallRating
+				+ ", Sunday=" + sunday + ", Monday=" + monday + ", Tuesday=" + tuesday + ", Wednesday=" + wednesday
+				+ ", Thursday=" + Thursday + ", Friday=" + friday + ", Saturday=" + saturday + "]";
 	}
 	
 }

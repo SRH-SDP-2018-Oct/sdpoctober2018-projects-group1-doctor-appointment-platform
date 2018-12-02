@@ -4,11 +4,13 @@
  */
 package com.srhheidelberg.sdp.dap.model.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -20,26 +22,31 @@ public class Doctor_Type {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long DoctorTypeId;
+	@Column(name="DoctorTypeId")
+	private Long doctorTypeId;
 	
-	private String DoctorType;
+	@Column(name="DoctorType")
+	private String doctorType;
+	
+	@OneToOne(mappedBy = "doctorTypeId")
+    private Doctor_User doctorUser;
 	
 	public Long getDoctortypeid() {
-		return DoctorTypeId;
+		return doctorTypeId;
 	}
 	public void setDoctortypeid(Long DoctorTypeId) {
-		this.DoctorTypeId = DoctorTypeId;
+		this.doctorTypeId = DoctorTypeId;
 	}
 	public String getDoctortype() {
-		return DoctorType;
+		return doctorType;
 	}
 	public void setDoctortype(String DoctorType) {
-		this.DoctorType = DoctorType;
+		this.doctorType = DoctorType;
 	}
 
 	@Override
 	public String toString() {
-		return "Doctortype [doctortypeid=" + DoctorTypeId + ", doctortype=" + DoctorType + "]";
+		return "Doctortype [doctortypeid=" + doctorTypeId + ", doctortype=" + doctorType + "]";
 	}
 
 }
