@@ -6,5 +6,5 @@ import com.srhheidelberg.dap.doctorappointmentplatform.model.PatientUser;
 
 public interface PatientUserRepository extends JpaRepository<PatientUser, Integer> {
 
-	PatientUser findByEmail(String email);
+	PatientUser findByPatientEmail(String email);
 }
