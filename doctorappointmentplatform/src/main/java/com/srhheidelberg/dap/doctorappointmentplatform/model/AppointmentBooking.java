@@ -1,7 +1,5 @@
 package com.srhheidelberg.dap.doctorappointmentplatform.model;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +17,7 @@ public class AppointmentBooking {
 	private Integer appointmentBookingId;
 	
 	@Column(name="appointmentbookingslotdate")
-	private Date appointmentBookingSlotDate;
+	private String appointmentBookingSlotDate;
 	
 	@Column(name="appointmentbookingslotday")
 	private String appointmentBookingSlotDay;
@@ -68,11 +66,11 @@ public class AppointmentBooking {
 		this.appointmentBookingId = appointmentBookingId;
 	}
 
-	public Date getAppointmentBookingSlotDate() {
+	public String getAppointmentBookingSlotDate() {
 		return appointmentBookingSlotDate;
 	}
 
-	public void setAppointmentBookingSlotDate(Date appointmentBookingSlotDate) {
+	public void setAppointmentBookingSlotDate(String appointmentBookingSlotDate) {
 		this.appointmentBookingSlotDate = appointmentBookingSlotDate;
 	}
 

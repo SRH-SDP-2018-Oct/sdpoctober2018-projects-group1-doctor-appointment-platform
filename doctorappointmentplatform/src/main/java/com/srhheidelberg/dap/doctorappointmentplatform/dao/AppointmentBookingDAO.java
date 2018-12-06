@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.srhheidelberg.dap.doctorappointmentplatform.model.AppointmentBooking;
-import com.srhheidelberg.dap.doctorappointmentplatform.repositories.AppointmentBookingRepository;
+import com.srhheidelberg.dap.doctorappointmentplatform.repositories.ApptBookingRepository;
 
 @Service
 public class AppointmentBookingDAO {
 	
 	@Autowired
-	AppointmentBookingRepository appointmentBookingRepository;
+	ApptBookingRepository appointmentBookingRepository;
 	
 	public AppointmentBooking getById(Integer id) {
 		return appointmentBookingRepository.getOne(id);
@@ -21,5 +21,5 @@ public class AppointmentBookingDAO {
 	public List<AppointmentBooking> findAll() {
 		return appointmentBookingRepository.findAll();
 	}
-
+	
 }

@@ -21,5 +21,10 @@ public class DoctorUserDAO {
 	public void save(DoctorUser doctorUser) {
 		doctorUserRepository.save(doctorUser);
 	}
+	
+	public List<DoctorUser> getAvailableDoctors(Integer selectedCity, Integer selectedDoctorType, Integer selectedSlot, Long todaysDate) {
+		
+		return doctorUserRepository.findAll();
+	}
 
 }

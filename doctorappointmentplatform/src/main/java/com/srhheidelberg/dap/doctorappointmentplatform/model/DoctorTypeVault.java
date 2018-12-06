@@ -17,10 +17,10 @@ public class DoctorTypeVault {
 	private Integer doctorTypeId;
 	
 	@Column(name="doctortypename")
-	private Integer doctorTypeName;
+	private String doctorTypeName;
 
 	@Column(name="doctortypedescription")
-	private Integer doctorTypeDescription;
+	private String doctorTypeDescription;
 
 	@Override
 	public String toString() {
@@ -36,19 +36,19 @@ public class DoctorTypeVault {
 		this.doctorTypeId = doctorTypeId;
 	}
 
-	public Integer getDoctorTypeName() {
+	public String getDoctorTypeName() {
 		return doctorTypeName;
 	}
 
-	public void setDoctorTypeName(Integer doctorTypeName) {
+	public void setDoctorTypeName(String doctorTypeName) {
 		this.doctorTypeName = doctorTypeName;
 	}
 
-	public Integer getDoctorTypeDescription() {
+	public String getDoctorTypeDescription() {
 		return doctorTypeDescription;
 	}
 
-	public void setDoctorTypeDescription(Integer doctorTypeDescription) {
+	public void setDoctorTypeDescription(String doctorTypeDescription) {
 		this.doctorTypeDescription = doctorTypeDescription;
 	}
 	

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1" />
+</head>
+<style>
+div.solid {
+	border-style: solid;
+	background-color: #abcdef;
+	width: 20%;
+	height: 30%;
+	overflow: scroll;
+}
+
+table, th, td {
+	border: 1px solid grey;
+	border-collapse: collapse;
+	padding: 5px;
+}
+
+table tr:nth-child(odd) {
+	background-color: #f1f1f1;
+}
+
+table tr:nth-child(even) {
+	background-color: #ffffff;
+}
+</style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<link href="src/css/angular-datepicker.css" rel="stylesheet"
+	type="text/css" />
+<script src="src/js/angular-datepicker.js"></script>
+<body>
+	<div data-ng-app="myApp" data-ng-controller="formCtrl">
+		<div class="solid">
+			<p class="solid">{{heading}}</p>
+			City: <select ng-model="selectedCity"
+				ng-options="x.cityName for x in citynames">
+				<option value="">--SelectCity--</option>
+			</select> <br /> Doctor Types: <select ng-model="selectedDoctorType"
+				ng-options="x.doctorTypeName for x in doctortypes">
+				<option value="">--Select Doctor Type--</option>
+			</select> <br /> Slot Types: <select ng-model="selectedSlot"
+				ng-options="x.slotName for x in slots"><option value="">--Select
+					Slot Type--</option></select>
+			<br/>
+			Date Picker: <input type="date" id="selecteddate" name="selecteddate"
+				ng-model="selecteddate" placeholder="yyyy-MM-dd" min="2018-12-06" max="2018-12-31" required /> 
+				<!--
+		<datepicker> <input ng-model="date" type="text" /> </datepicker> -->
+			<!-- <br />value = {{selecteddate | date: "yyyy-MM-dd"}}<br/> -->
+			 <br />Search Doctors:
+			<button class="btn btn-info prevnext pull-right"
+				ng-click="getAvailableDoctors(selectedCity, selectedDoctorType, selectedSlot)">Search</button>
+			<p>Available Doctors:</p>
+
+			<table>
+				<th>Select Doctor</th>
+				<th>Name</th>
+				<th>Fee</th>
+				<th>Address</th>
+				<tr ng-repeat="doctor in availabledoctors">
+					<td><input type="radio" ng-model="selecteddoctor"
+						value="{{doctor.doctorUserId}}"></td>
+					<td>{{doctor.doctorFirstName}} {{doctor.doctorLastName}}</td>
+					<td>{{doctor.doctorFees}}</td>
+					<td>{{doctor.doctorSteetAddress}},
+						{{doctor.doctorAreaAddress}}, {{selectedCity.cityName}},
+						{{doctor.doctorPostalCode}}.</td>
+				</tr>
+			</table>
+
+			<!-- <select ng-model="availabledoctors" ng-options="x.doctorLastName for x in availabledoctors"></select> -->
+		</div>
+	</div>
+
+	<script>
+		var app = angular.module('myApp', []);
+		app
+				.controller(
+						'formCtrl',
+						function($scope, $location, $http) {
+							$scope.heading = "Search Available Doctors";
+							$http.get("http://localhost:8888/cityvault/cities")
+									.then(function(response) {
+										$scope.citynames = response.data;
+									}, function myError(response) {
+										$scope.heading += response.statusText;
+									});
+							$http
+									.get(
+											"http://localhost:8888/cityvault/doctortypes")
+									.then(function(response) {
+										$scope.doctortypes = response.data;
+									}, function myError(response) {
+										$scope.heading += response.statusText;
+									});
+							$http.get("http://localhost:8888/cityvault/slots")
+									.then(function(response) {
+										$scope.slots = response.data;
+									}, function myError(response) {
+										$scope.heading += response.statusText;
+									});
+
+							$scope.getAvailableDoctors = function(selectedCity,
+									selectedDoctorType, selectedSlot, selecteddate) {
+								//var dateSel = selecteddate | date: "yyyy-MM-dd";
+								//alert();
+								if (selectedCity != null
+										& selectedDoctorType != null
+										& selectedSlot != null) {
+									console.log(selectedCity,
+											selectedDoctorType, selectedSlot);
+									var url = "http://localhost:8888/cityvault/availabledoctors/";
+									url += selectedCity.cityId + "/";
+									url += selectedDoctorType.doctorTypeId
+											+ "/";
+									url += selectedSlot.slotId;
+									$http
+											.get(url)
+											.then(
+													function(response) {
+														$scope.isDoctorsAvailable = true;
+														$scope.availabledoctors = response.data;
+													},
+													function myError(response) {
+														$scope.heading += response.statusText;
+													});
+								} else {
+									//alert("Please Select Proper Values to Search");
+								}
+
+							};
+
+							$scope.selectedDoctorName = function() {
+								alert(selecteddoctor);
+							}
+
+						});
+	</script>
+
+</body>
+</html>

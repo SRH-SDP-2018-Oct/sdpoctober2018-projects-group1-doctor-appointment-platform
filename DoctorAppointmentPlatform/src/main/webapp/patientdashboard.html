@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Patient Dashboard</title>
+</head>
+<style>
+div.upcomingappointments {
+	border-style: solid;
+	background-color: #abcdef;
+	width: 100%;
+	height: 100%;
+}
+
+div.previousappointments {
+	border-style: solid;
+	background-color: #a1c1e1;
+	width: 100%;
+	height: 100%;
+}
+
+div.feebackremaingappointments {
+	border-style: solid;
+	background-color: #abcdef;
+	width: 100%;
+	height: 100%;
+}
+
+div.bookappointments {
+	border-style: solid;
+	background-color: #abcdef;
+	width: 100%;
+	height: 100%;
+}
+
+table, th, td {
+	border: 1px solid grey;
+	border-collapse: collapse;
+	padding: 5px;
+}
+
+table tr:nth-child(odd) {
+	background-color: #f1f1f1;
+}
+
+table tr:nth-child(even) {
+	background-color: #ffffff;
+}
+</style>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<body>
+	<div data-ng-app="patientdashboardapp"
+		data-ng-controller="patientdashboardcontroller">
+
+		<table>
+		<tr>
+			<th>Upcoming</th>
+			<th>Previous</th>
+		</tr>
+		<tr>
+		
+			<td><div class="upcomingappointments">
+				<table>
+					<tr>
+						<th>Slot</th>
+						<th>Patient</th>
+						<th>Doctor</th>
+					</tr>
+					<tr ng-repeat="upcomingappointment in patientupcomingappointments">
+						<td>{{slots[upcomingappointment.appointmentBookingSlotTime-1].slotName }}</td>
+						<td>{{patientusers[upcomingappointment.appointmentBookingSlotTime-1].patientLastName }}</td>
+						<td>{{doctorusers[upcomingappointment.appointmentBookingSlotTime-1].doctorLastName }}</td>
+					</tr>
+				</table>
+			</div></td>
+			<td><div class="previousappointments">
+				<table>
+					<tr>
+						<th>Slot</th>
+						<th>Patient</th>
+						<th>Doctor</th>
+					</tr>
+					<tr ng-repeat="previousappointment in patientpreviousappointments">
+						<td>{{slots[previousappointment.appointmentBookingSlotTime-1].slotName }}</td>
+						<td>{{patientusers[previousappointment.appointmentBookingSlotTime-1].patientLastName }}</td>
+						<td>{{doctorusers[previousappointment.appointmentBookingSlotTime-1].doctorLastName }}</td>
+					</tr>
+				</table>
+			</div></td></tr><tr>
+			<td><div class="feebackremaingappointments">
+				<table>
+					<tr>
+						<th>Slot</th>
+						<th>Patient</th>
+						<th>Doctor</th>
+					</tr>
+					<tr ng-repeat="feebackremaingappointment in patientfeebackremaingappointments">
+						<td>{{slots[feebackremaingappointment.appointmentBookingSlotTime-1].slotName }}</td>
+						<td>{{patientusers[feebackremaingappointment.appointmentBookingSlotTime-1].patientLastName }}</td>
+						<td>{{doctorusers[feebackremaingappointment.appointmentBookingSlotTime-1].doctorLastName }}</td>
+					</tr>
+				</table>
+			</div></td>
+			<td><div class="bookappointments"></div></td></tr>
+		</table>
+	</div>
+	<script>
+	var app = angular.module('patientdashboardapp', []);
+	app.controller('patientdashboardcontroller', function($scope, $location, $http) {
+		//Upcoming
+		$http.get("http://localhost:8888/cityvault/patientupcomingappointments")
+		.then(function(response) {
+			$scope.patientupcomingappointments = response.data;
+		}, function myError(response) {
+			$scope.heading += response.statusText;
+		});
+		//Previous
+		$http.get("http://localhost:8888/cityvault/patientpreviousappointments")
+		.then(function(response) {
+			$scope.patientpreviousappointments = response.data;
+		}, function myError(response) {
+			$scope.heading += response.statusText;
+		});
+		//Feedbackremaining
+		$http.get("http://localhost:8888/cityvault/patientfeebackremaingappointments")
+		.then(function(response) {
+			$scope.patientfeebackremaingappointments = response.data;
+		}, function myError(response) {
+			$scope.heading += response.statusText;
+		});
+		
+		
+		//Slot
+		$http.get("http://localhost:8888/cityvault/slots")
+		.then(function(response) {
+			$scope.slots = response.data;
+			console.log(response.data);
+		}, function myError(response) {
+			$scope.heading += response.statusText;
+		});
+		//Patients
+		$http.get("http://localhost:8888/cityvault/patientusers")
+		.then(function(response) {
+			$scope.patientusers = response.data;
+			console.log(response.data);
+		}, function myError(response) {
+			$scope.heading += response.statusText;
+			console.log(response.statusText);
+		});
+		//Doctors
+		$http.get("http://localhost:8888/cityvault/doctorusers")
+		.then(function(response) {
+			$scope.doctorusers = response.data;
+		}, function myError(response) {
+			$scope.heading += response.statusText;
+		});
+		
+	});
+	</script>
+</body>
+</html>

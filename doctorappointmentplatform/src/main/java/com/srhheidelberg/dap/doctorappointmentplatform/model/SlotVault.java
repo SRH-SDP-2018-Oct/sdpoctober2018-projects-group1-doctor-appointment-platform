@@ -17,13 +17,13 @@ public class SlotVault {
 	private Integer slotId;
 	
 	@Column(name="slotname")
-	private Integer slotName;
+	private String slotName;
 	
 	@Column(name="slotstarttime")
-	private Integer slotStartTime;
+	private String slotStartTime;
 	
 	@Column(name="slotendtime")
-	private Integer slotEndTime;
+	private String slotEndTime;
 
 	public Integer getSlotId() {
 		return slotId;
@@ -33,27 +33,27 @@ public class SlotVault {
 		this.slotId = slotId;
 	}
 
-	public Integer getSlotName() {
+	public String getSlotName() {
 		return slotName;
 	}
 
-	public void setSlotName(Integer slotName) {
+	public void setSlotName(String slotName) {
 		this.slotName = slotName;
 	}
 
-	public Integer getSlotStartTime() {
+	public String getSlotStartTime() {
 		return slotStartTime;
 	}
 
-	public void setSlotStartTime(Integer slotStartTime) {
+	public void setSlotStartTime(String slotStartTime) {
 		this.slotStartTime = slotStartTime;
 	}
 
-	public Integer getSlotEndTime() {
+	public String getSlotEndTime() {
 		return slotEndTime;
 	}
 
-	public void setSlotEndTime(Integer slotEndTime) {
+	public void setSlotEndTime(String slotEndTime) {
 		this.slotEndTime = slotEndTime;
 	}
 
