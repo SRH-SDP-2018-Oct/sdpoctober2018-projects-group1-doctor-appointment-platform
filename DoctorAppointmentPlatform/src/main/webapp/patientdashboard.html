@@ -1,36 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
+<!-- <meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+
 <title>Patient Dashboard</title>
 </head>
 <style>
 div.upcomingappointments {
 	border-style: solid;
 	background-color: #abcdef;
-	width: 100%;
-	height: 100%;
+	width: 500px;
+	height: 300px;
+	overflow: scroll;
+	display: block;
 }
 
 div.previousappointments {
 	border-style: solid;
 	background-color: #a1c1e1;
-	width: 100%;
-	height: 100%;
+	width: 500px;
+	height: 300px;
+	overflow: scroll;
+	display: block;
+}
+
+div.searchappointments {
+	border-style: solid;
+	background-color: #abcdef;
+	width: 500px;
+	height: 300px;
+	overflow: scroll;
+	display: block;
 }
 
 div.feebackremaingappointments {
 	border-style: solid;
 	background-color: #abcdef;
-	width: 100%;
-	height: 100%;
+	width: 500px;
+	height: 300px;
+	overflow: scroll;
+	display: block;
+}
+
+div.patienttodayappointments {
+	border-style: solid;
+	background-color: #abcdef;
+	width: 500px;
+	height: 300px;
+	overflow: scroll;
+	display: block;
 }
 
 div.bookappointments {
 	border-style: solid;
 	background-color: #abcdef;
-	width: 100%;
-	height: 100%;
+	width: 500px;
+	height: 300px;
+	overflow: scroll;
+	display: block;
 }
 
 table, th, td {
@@ -47,7 +76,23 @@ table tr:nth-child(even) {
 	background-color: #ffffff;
 }
 </style>
-
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+	crossorigin="anonymous"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
@@ -56,109 +101,240 @@ table tr:nth-child(even) {
 		data-ng-controller="patientdashboardcontroller">
 
 		<table>
-		<tr>
-			<th>Upcoming</th>
-			<th>Previous</th>
-		</tr>
-		<tr>
-		
-			<td><div class="upcomingappointments">
-				<table>
-					<tr>
-						<th>Slot</th>
-						<th>Patient</th>
-						<th>Doctor</th>
-					</tr>
-					<tr ng-repeat="upcomingappointment in patientupcomingappointments">
-						<td>{{slots[upcomingappointment.appointmentBookingSlotTime-1].slotName }}</td>
-						<td>{{patientusers[upcomingappointment.appointmentBookingSlotTime-1].patientLastName }}</td>
-						<td>{{doctorusers[upcomingappointment.appointmentBookingSlotTime-1].doctorLastName }}</td>
-					</tr>
-				</table>
-			</div></td>
-			<td><div class="previousappointments">
-				<table>
-					<tr>
-						<th>Slot</th>
-						<th>Patient</th>
-						<th>Doctor</th>
-					</tr>
-					<tr ng-repeat="previousappointment in patientpreviousappointments">
-						<td>{{slots[previousappointment.appointmentBookingSlotTime-1].slotName }}</td>
-						<td>{{patientusers[previousappointment.appointmentBookingSlotTime-1].patientLastName }}</td>
-						<td>{{doctorusers[previousappointment.appointmentBookingSlotTime-1].doctorLastName }}</td>
-					</tr>
-				</table>
-			</div></td></tr><tr>
-			<td><div class="feebackremaingappointments">
-				<table>
-					<tr>
-						<th>Slot</th>
-						<th>Patient</th>
-						<th>Doctor</th>
-					</tr>
-					<tr ng-repeat="feebackremaingappointment in patientfeebackremaingappointments">
-						<td>{{slots[feebackremaingappointment.appointmentBookingSlotTime-1].slotName }}</td>
-						<td>{{patientusers[feebackremaingappointment.appointmentBookingSlotTime-1].patientLastName }}</td>
-						<td>{{doctorusers[feebackremaingappointment.appointmentBookingSlotTime-1].doctorLastName }}</td>
-					</tr>
-				</table>
-			</div></td>
-			<td><div class="bookappointments"></div></td></tr>
+			<tr>
+				<th>Upcoming</th>
+				<th>Previous</th>
+				<th>Search</th>
+			</tr>
+			<tr>
+
+				<td><div class="upcomingappointments center">
+						<table>
+							<tr>
+								<th>Slot</th>
+								<th>Patient</th>
+								<th>Doctor</th>
+								<th>Date</th>
+								<th>Status</th>
+							</tr>
+							<tr
+								ng-repeat="upcomingappointment in patientupcomingappointments">
+								<td>{{slots[upcomingappointment.appointmentBookingSlotTime-1].slotName
+									}}</td>
+								<td>{{patientusers[upcomingappointment.appointmentBookingSlotTime-1].patientLastName
+									}}</td>
+								<td>{{doctorusers[upcomingappointment.appointmentBookingSlotTime-1].doctorLastName
+									}}</td>
+								<td>{{upcomingappointment.appointmentBookingSlotDate}}</td>
+								<td>{{upcomingappointment.appointmentBookingStatus }}</td>
+							</tr>
+						</table>
+					</div></td>
+				<td><div class="previousappointments">
+						<table>
+							<tr>
+								<th>Slot</th>
+								<th>Patient</th>
+								<th>Doctor</th>
+								<th>Date</th>
+								<th>Status</th>
+							</tr>
+							<tr
+								ng-repeat="previousappointment in patientpreviousappointments">
+								<td>{{slots[previousappointment.appointmentBookingSlotTime-1].slotName
+									}}</td>
+								<td>{{patientusers[previousappointment.appointmentBookingSlotTime-1].patientLastName
+									}}</td>
+								<td>{{doctorusers[previousappointment.appointmentBookingSlotTime-1].doctorLastName
+									}}</td>
+								<td>{{previousappointment.appointmentBookingSlotDate}}</td>
+								<td>{{previousappointment.appointmentBookingStatus }}</td>
+							</tr>
+						</table>
+					</div></td>
+				<td><div class="searchappointments">
+						<div class="solid">
+							<p class="solid">{{heading}}</p>
+							City: <select ng-model="selectedCity"
+								ng-options="x.cityName for x in citynames">
+								<option value="">--SelectCity--</option>
+							</select> <br /> Doctor Types: <select ng-model="selectedDoctorType"
+								ng-options="x.doctorTypeName for x in doctortypes">
+								<option value="">--Select Doctor Type--</option>
+							</select> <br /> Slot Types: <select ng-model="selectedSlot"
+								ng-options="x.slotName for x in slots"><option value="">--Select
+									Slot Type--</option></select> <br /> Date Picker: <input type="date"
+								id="selecteddate" name="selecteddate" ng-model="selecteddate"
+								placeholder="yyyy-MM-dd" min="2018-12-06" max="2018-12-31"
+								required />
+							<br />Search Doctors:
+							<button class="btn btn-info prevnext pull-right"
+								ng-click="getAvailableDoctors(selectedCity, selectedDoctorType, selectedSlot)">Search</button>
+						</div>
+					</div></td>
+			</tr>
+			<tr>
+				<th>Remaining</th>
+				<th>Misc.</th>
+				<th>Book.</th>
+			</tr>
+			<tr>
+				<td><div class="feebackremaingappointments">
+						<table>
+							<tr>
+								<th>Slot</th>
+								<th>Patient</th>
+								<th>Doctor</th>
+								<th>Date</th>
+								<th>Status</th>
+							</tr>
+							<tr
+								ng-repeat="feebackremaingappointment in patientfeebackremaingappointments">
+								<td>{{slots[feebackremaingappointment.appointmentBookingSlotTime-1].slotName
+									}}</td>
+								<td>{{patientusers[feebackremaingappointment.appointmentBookingSlotTime-1].patientLastName
+									}}</td>
+								<td>{{doctorusers[feebackremaingappointment.appointmentBookingSlotTime-1].doctorLastName
+									}}</td>
+								<td>{{feebackremaingappointment.appointmentBookingSlotDate}}</td>
+								<td>{{feebackremaingappointment.appointmentBookingStatus }}</td>
+							</tr>
+						</table>
+					</div></td>
+				<td><div class="patienttodayappointments"></div></td>
+				<td><div class="bookappointments">
+						<table>
+							<th>Select Doctor</th>
+							<th>Name</th>
+							<th>Fee</th>
+							<th>Address</th>
+							<tr ng-repeat="doctor in availabledoctors">
+								<td><input type="radio" ng-model="selecteddoctor"
+									value="{{doctor.doctorUserId}}"></td>
+								<td>{{doctor.doctorFirstName}} {{doctor.doctorLastName}}</td>
+								<td>{{doctor.doctorFees}}</td>
+								<td>{{doctor.doctorSteetAddress}},
+									{{doctor.doctorAreaAddress}}, {{selectedCity.cityName}},
+									{{doctor.doctorPostalCode}}.</td>
+							</tr>
+						</table>
+					</div></td>
+			</tr>
+			<tr>
+			<td>Create Report</td>
+			</tr>
 		</table>
 	</div>
 	<script>
-	var app = angular.module('patientdashboardapp', []);
-	app.controller('patientdashboardcontroller', function($scope, $location, $http) {
-		//Upcoming
-		$http.get("http://localhost:8888/cityvault/patientupcomingappointments")
-		.then(function(response) {
-			$scope.patientupcomingappointments = response.data;
-		}, function myError(response) {
-			$scope.heading += response.statusText;
-		});
-		//Previous
-		$http.get("http://localhost:8888/cityvault/patientpreviousappointments")
-		.then(function(response) {
-			$scope.patientpreviousappointments = response.data;
-		}, function myError(response) {
-			$scope.heading += response.statusText;
-		});
-		//Feedbackremaining
-		$http.get("http://localhost:8888/cityvault/patientfeebackremaingappointments")
-		.then(function(response) {
-			$scope.patientfeebackremaingappointments = response.data;
-		}, function myError(response) {
-			$scope.heading += response.statusText;
-		});
-		
-		
-		//Slot
-		$http.get("http://localhost:8888/cityvault/slots")
-		.then(function(response) {
-			$scope.slots = response.data;
-			console.log(response.data);
-		}, function myError(response) {
-			$scope.heading += response.statusText;
-		});
-		//Patients
-		$http.get("http://localhost:8888/cityvault/patientusers")
-		.then(function(response) {
-			$scope.patientusers = response.data;
-			console.log(response.data);
-		}, function myError(response) {
-			$scope.heading += response.statusText;
-			console.log(response.statusText);
-		});
-		//Doctors
-		$http.get("http://localhost:8888/cityvault/doctorusers")
-		.then(function(response) {
-			$scope.doctorusers = response.data;
-		}, function myError(response) {
-			$scope.heading += response.statusText;
-		});
-		
-	});
+		var app = angular.module('patientdashboardapp', []);
+		app
+				.controller(
+						'patientdashboardcontroller',
+						function($scope, $location, $http) {
+							//Upcoming
+							$http
+									.get(
+											"http://localhost:8888/app/cityvault/patientupcomingappointments")
+									.then(
+											function(response) {
+												$scope.patientupcomingappointments = response.data;
+											},
+											function myError(response) {
+												$scope.heading += response.statusText;
+											});
+							//Previous
+							$http
+									.get(
+											"http://localhost:8888/app/cityvault/patientpreviousappointments")
+									.then(
+											function(response) {
+												$scope.patientpreviousappointments = response.data;
+											},
+											function myError(response) {
+												$scope.heading += response.statusText;
+											});
+							//Feedbackremaining
+							$http
+									.get(
+											"http://localhost:8888/app/cityvault/patientfeebackremaingappointments")
+									.then(
+											function(response) {
+												$scope.patientfeebackremaingappointments = response.data;
+											},
+											function myError(response) {
+												$scope.heading += response.statusText;
+											});
+							//Slot
+							$http.get("http://localhost:8888/app/cityvault/slots")
+									.then(function(response) {
+										$scope.slots = response.data;
+										console.log(response.data);
+									}, function myError(response) {
+										$scope.heading += response.statusText;
+									});
+							//Patients
+							$http
+									.get(
+											"http://localhost:8888/app/cityvault/patientusers")
+									.then(function(response) {
+										$scope.patientusers = response.data;
+										console.log(response.data);
+									}, function myError(response) {
+										$scope.heading += response.statusText;
+										console.log(response.statusText);
+									});
+							//Doctors
+							$http
+									.get(
+											"http://localhost:8888/app/cityvault/doctorusers")
+									.then(function(response) {
+										$scope.doctorusers = response.data;
+									}, function myError(response) {
+										$scope.heading += response.statusText;
+									});
+							//Cities
+							$http.get("http://localhost:8888/app/cityvault/cities")
+							.then(function(response) {
+								$scope.citynames = response.data;
+							}, function myError(response) {
+								$scope.heading += response.statusText;
+							});
+							//Doctor Types
+							$http.get("http://localhost:8888/app/cityvault/doctortypes")
+									.then(function(response) {
+										$scope.doctortypes = response.data;
+									}, function myError(response) {
+										$scope.heading += response.statusText;
+									});
+							$scope.getAvailableDoctors = function(selectedCity,
+									selectedDoctorType, selectedSlot, selecteddate) {
+								//var dateSel = selecteddate | date: "yyyy-MM-dd";
+								//alert();
+								if (selectedCity != null
+										& selectedDoctorType != null
+										& selectedSlot != null) {
+									console.log(selectedCity,
+											selectedDoctorType, selectedSlot);
+									var url = "http://localhost:8888/app/cityvault/availabledoctors/";
+									url += selectedCity.cityId + "/";
+									url += selectedDoctorType.doctorTypeId
+											+ "/";
+									url += selectedSlot.slotId;
+									$http.get(url)
+											.then(function(response) {
+														$scope.isDoctorsAvailable = true;
+														$scope.availabledoctors = response.data;
+													},
+													function myError(response) {
+														$scope.heading += response.statusText;
+													});
+								} else {
+									alert("Please Select Proper Values to Search");
+								}
+
+							};
+
+						});
 	</script>
 </body>
 </html>

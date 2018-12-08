@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="ISO-8859-1" />
+</head>
+<style>
+div.solid {
+	border-style: solid;
+	background-color: #abcdef;
+	width: 20%;
+	height: 30%;
+	overflow: scroll;
+}
+
+table, th, td {
+	border: 1px solid grey;
+	border-collapse: collapse;
+	padding: 5px;
+}
+
+table tr:nth-child(odd) {
+	background-color: #f1f1f1;
+}
+
+table tr:nth-child(even) {
+	background-color: #ffffff;
+}
+</style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<link href="src/css/angular-datepicker.css" rel="stylesheet"
+	type="text/css" />
+<script src="src/js/angular-datepicker.js"></script>
+<body>
+	<div data-ng-app="myApp" data-ng-controller="formCtrl">
+		<br />Login
+		<button ng-click="patientLogin()">Login</button>
+	</div>
+	<script>
+		var app = angular.module('myApp', []);
+		app.controller('formCtrl', function($scope, $location, $http) {
+
+			$scope.patientLogin = function() {
+				//alert();
+				
+				$http.get("http://localhost:8888/app/cityvault/patientuserlogin/email1@test.com")
+				.then(function(response) {
+							//window.location = "http://localhost:8888/app/"
+							$scope.patientuser = response.data.patientPassword;
+							if($scope.patientuser == "password1") {
+								window.location = "http://localhost:8888/app/appointmentbookingapp/patientdashboard";
+							}
+							else {
+								window.location = "http://localhost:8888/app/"
+							}
+						},
+						function myError(response) {
+							window.location = "http://localhost:8888/app/";
+						});
+
+			};
+
+		});
+	</script>
+</body>
+</html>

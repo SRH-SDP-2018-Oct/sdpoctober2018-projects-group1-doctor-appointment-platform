@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="ISO-8859-1">
+<title>DAP Home</title>
+</head>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+	<div data-ng-app="myApp" data-ng-controller="cnt">
+	<br/>
+		<button ng-click="goToPatientLogin()">Patient Login</button>
+		<br/><br/>
+		<button ng-click="goToPatientLogin()">Doctor Login</button>
+	</div>
+	<script>
+		var app = angular.module('myApp', []);
+		app.controller('cnt', function($scope, $location, $http) {
+			
+			$scope.goToPatientLogin = function() {
+				window.location = "http://localhost:8888/app/appointmentbookingapp/patientlogin"
+				
+			};
+			
+			});
+	</script>
+</body>
+</html>

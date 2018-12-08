@@ -1,4 +1,4 @@
-package com.srhheidelberg.dap.doctorappointmentplatform.controller;
+package com.srhheidelberg.dap.doctorappointmentplatform.restcontroller;
 
 import java.util.Calendar;
 import java.util.List;
@@ -83,17 +83,32 @@ public class CityVaultController {
 	
 	@GetMapping("/patientupcomingappointments")
 	public List<AppointmentBooking> getPatientUpcomingAppointments() {
-		return appointmentBookingDAO.findAll();
+		return appointmentBookingDAO.findPatientUpcomingAppointments();
+	}
+	
+	@GetMapping("/doctorupcomingappointments")
+	public List<AppointmentBooking> getDoctorUpcomingAppointments() {
+		return appointmentBookingDAO.findDoctorUpcomingAppointments();
 	}
 	
 	@GetMapping("/patientpreviousappointments")
 	public List<AppointmentBooking> getPatientPreviousAppointments() {
-		return appointmentBookingDAO.findAll();
+		return appointmentBookingDAO.findPatientPreviousAppointments();
+	}
+	
+	@GetMapping("/doctorpreviousappointments")
+	public List<AppointmentBooking> getDoctorPreviousAppointments() {
+		return appointmentBookingDAO.findDoctorPreviousAppointments();
 	}
 	
 	@GetMapping("/patientfeebackremaingappointments")
 	public List<AppointmentBooking> getPatientFeedbackRemainingAppointments() {
-		return appointmentBookingDAO.findAll();
+		return appointmentBookingDAO.findPatientFeedbackRemainAppointments();
+	}
+	
+	@GetMapping("/doctorstatusremainingappointments")
+	public List<AppointmentBooking> getDoctorStatusRemainingAppointments() {
+		return appointmentBookingDAO.findDoctorAppointmentStatusRemainings();
 	}
 	
 	@GetMapping("/doctorusers")
@@ -109,5 +124,10 @@ public class CityVaultController {
 	@GetMapping("/cities/{id}")
 	public Optional<CityVault> getCityById(@PathVariable(value="id") Integer cityId) {
 		return cityVaultDAO.findOne(cityId);
+	}
+	
+	@GetMapping("/patientuserlogin/{patientEmail}")
+	public PatientUser getPatientUserByEmail(@PathVariable(value="patientEmail") String patientEmail) {
+		return patientUserDAO.findByPatientEmail(patientEmail);
 	}
 }

@@ -21,4 +21,8 @@ public class PatientUserDAO {
 	public PatientUser getById(Integer id) {
 		return patientUserRepository.getOne(id);
 	}
+	
+	public PatientUser findByPatientEmail(String patientEmail) {
+		return patientUserRepository.findByPatientEmail(patientEmail);
+	}
 }
