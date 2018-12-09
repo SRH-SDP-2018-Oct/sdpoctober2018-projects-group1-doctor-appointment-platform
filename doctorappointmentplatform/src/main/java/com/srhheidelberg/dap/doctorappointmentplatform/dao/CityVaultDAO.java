@@ -6,31 +6,32 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.srhheidelberg.dap.doctorappointmentplatform.daointrfc.CityVaultIDAO;
 import com.srhheidelberg.dap.doctorappointmentplatform.model.CityVault;
-import com.srhheidelberg.dap.doctorappointmentplatform.repositories.CityVaultRepository;
+import com.srhheidelberg.dap.doctorappointmentplatform.repository.CityVaultRepository;
 
 @Service
-public class CityVaultDAO {
+public class CityVaultDAO implements CityVaultIDAO {
 
 	@Autowired
 	private CityVaultRepository cityVaultRepository;
 	
-	//Save City
+	@Override
 	public CityVault save(CityVault city) {
 		return cityVaultRepository.save(city);
 	}
 	
-	//Search Cities
+	@Override
 	public List<CityVault> findAll() {
 		return (List<CityVault>) cityVaultRepository.findAll();
 	}
 	
-	//Get a City
+	@Override
 	public Optional<CityVault> findOne(Integer cityId) {
 		return cityVaultRepository.findById(cityId);
 	}
 	
-	//Delete a City
+	@Override
 	public void delete(CityVault city) {
 		cityVaultRepository.delete(city);
 	}

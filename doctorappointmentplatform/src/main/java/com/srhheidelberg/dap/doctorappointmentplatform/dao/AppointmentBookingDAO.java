@@ -10,23 +10,27 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.srhheidelberg.dap.doctorappointmentplatform.daointrfc.AppointmentBookingIDAO;
 import com.srhheidelberg.dap.doctorappointmentplatform.model.AppointmentBooking;
-import com.srhheidelberg.dap.doctorappointmentplatform.repositories.ApptBookingRepository;
+import com.srhheidelberg.dap.doctorappointmentplatform.repository.ApptBookingRepository;
 
 @Service
-public class AppointmentBookingDAO {
+public class AppointmentBookingDAO implements AppointmentBookingIDAO {
 
 	@Autowired
 	ApptBookingRepository appointmentBookingRepository;
 
+	@Override
 	public AppointmentBooking getById(Integer id) {
 		return appointmentBookingRepository.getOne(id);
 	}
 
+	@Override
 	public List<AppointmentBooking> findAll() {
 		return appointmentBookingRepository.findAll();
 	}
 
+	@Override
 	public List<AppointmentBooking> findDoctorUpcomingAppointments() {
 
 		Integer docId = 1;
@@ -35,6 +39,7 @@ public class AppointmentBookingDAO {
 		return getUpcomingApptBooking(appointmentBookingList);
 	}
 
+	@Override
 	public List<AppointmentBooking> findPatientUpcomingAppointments() {
 
 		Integer patId = 1;
@@ -62,6 +67,7 @@ public class AppointmentBookingDAO {
 		return bookedUpcomingAppointments;
 	}
 
+	@Override
 	public List<AppointmentBooking> findDoctorPreviousAppointments() {
 
 		Integer docId = 1;
@@ -70,6 +76,7 @@ public class AppointmentBookingDAO {
 		return getPreviousApptBooking(appointmentBookingList);
 	}
 
+	@Override
 	public List<AppointmentBooking> findPatientPreviousAppointments() {
 
 		Integer patId = 1;
@@ -97,6 +104,7 @@ public class AppointmentBookingDAO {
 		return bookedPreviousAppointments;
 	}
 
+	@Override
 	public List<AppointmentBooking> findDoctorAppointmentStatusRemainings() {
 		Integer patId = 1;//Doctored
 		List<AppointmentBooking> appointmentBookingList = appointmentBookingRepository
@@ -104,6 +112,7 @@ public class AppointmentBookingDAO {
 		return getAppointmentByStatus(getPreviousApptBooking(appointmentBookingList), "Doctored");
 	}
 
+	@Override
 	public List<AppointmentBooking> findPatientFeedbackRemainAppointments() {
 
 		Integer patId = 1;//Treated
@@ -124,23 +133,4 @@ public class AppointmentBookingDAO {
 		return statuswiseAppointments;
 	}
 	
-	private List<AppointmentBooking> getAppointmentByToday(List<AppointmentBooking> appointmentBookingList) {
-		List<AppointmentBooking> bookedTodayAppointments = new ArrayList<AppointmentBooking>();
-		Calendar cal = Calendar.getInstance();
-		Date currentDate = cal.getTime();
-		for (AppointmentBooking appointmentBooking : appointmentBookingList) {
-			Date appointmentDate = null;
-			try {
-				appointmentDate = new SimpleDateFormat("yyyy-MM-dd")
-						.parse(appointmentBooking.getAppointmentBookingSlotDate());
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			if (appointmentDate.equals(currentDate)) {
-				bookedTodayAppointments.add(appointmentBooking);
-			}
-		}
-		return bookedTodayAppointments;
-	}
-
 }

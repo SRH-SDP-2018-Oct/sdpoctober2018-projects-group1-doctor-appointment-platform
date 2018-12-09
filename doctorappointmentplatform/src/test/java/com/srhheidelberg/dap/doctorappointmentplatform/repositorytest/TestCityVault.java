@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.srhheidelberg.dap.doctorappointmentplatform.dao.CityVaultDAO;
 import com.srhheidelberg.dap.doctorappointmentplatform.model.CityVault;
-import com.srhheidelberg.dap.doctorappointmentplatform.repositories.CityVaultRepository;
+import com.srhheidelberg.dap.doctorappointmentplatform.repository.CityVaultRepository;
 
 /*@RunWith(SpringRunner.class)
 @SpringBootTest*/

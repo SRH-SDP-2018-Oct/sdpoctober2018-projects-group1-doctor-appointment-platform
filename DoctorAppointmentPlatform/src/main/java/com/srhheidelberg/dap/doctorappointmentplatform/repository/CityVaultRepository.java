@@ -1,4 +1,4 @@
-package com.srhheidelberg.dap.doctorappointmentplatform.repositories;
+package com.srhheidelberg.dap.doctorappointmentplatform.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
