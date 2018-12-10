@@ -30,7 +30,7 @@ public class CityVaultRestController {
 	}
 	
 	@GetMapping("/cities")
-	public List<CityVault> getAllEmployees(ModelMap modelMap) {
+	public List<CityVault> getAll() {
 		return cityVaultDAO.findAll();
 	}
 	

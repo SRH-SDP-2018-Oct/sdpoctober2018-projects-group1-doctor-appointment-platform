@@ -45,6 +45,12 @@ public class AppointmentBooking {
 	
 	@Column(name="appointmentbookingstatus")
 	private String appointmentBookingStatus;
+	
+	@Column(name="appointmentbookingdoctortype")
+	private Integer appointmentBookingDoctorType;
+
+	@Column(name="appointmentbookingdoctortcity")
+	private Integer appointmentBookingDoctorCity;
 
 	@Override
 	public String toString() {
@@ -55,7 +61,24 @@ public class AppointmentBooking {
 				+ ", appointmentBookingTreatment=" + appointmentBookingTreatment + ", appointmentBookingPrescription="
 				+ appointmentBookingPrescription + ", appointmentBookingRating=" + appointmentBookingRating
 				+ ", appointmentBookingFeedback=" + appointmentBookingFeedback + ", appointmentBookingStatus="
-				+ appointmentBookingStatus + "]";
+				+ appointmentBookingStatus + ", appointmentBookingDoctorType=" + appointmentBookingDoctorType
+				+ ", appointmentBookingDoctorCity=" + appointmentBookingDoctorCity + "]";
+	}
+
+	public Integer getAppointmentBookingDoctorCity() {
+		return appointmentBookingDoctorCity;
+	}
+
+	public void setAppointmentBookingDoctorCity(Integer appointmentBookingDoctorCity) {
+		this.appointmentBookingDoctorCity = appointmentBookingDoctorCity;
+	}
+
+	public Integer getAppointmentBookingDoctorType() {
+		return appointmentBookingDoctorType;
+	}
+
+	public void setAppointmentBookingDoctorType(Integer appointmentBookingDoctorType) {
+		this.appointmentBookingDoctorType = appointmentBookingDoctorType;
 	}
 
 	public Integer getAppointmentBookingId() {

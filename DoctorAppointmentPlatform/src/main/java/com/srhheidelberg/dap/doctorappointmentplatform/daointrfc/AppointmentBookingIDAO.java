@@ -21,5 +21,5 @@ public interface AppointmentBookingIDAO {
 	List<AppointmentBooking> findDoctorAppointmentStatusRemainings();
 
 	List<AppointmentBooking> findPatientFeedbackRemainAppointments();
-
+	
 }

@@ -10,8 +10,8 @@ import com.srhheidelberg.dap.doctorappointmentplatform.model.AppointmentAvailabi
 import com.srhheidelberg.dap.doctorappointmentplatform.repository.ApptAvailabilityRepository;
 
 @Service
-public class AppointmentAvailabilityDAO implements  AppointmentAvailabilityIDAO{
-	
+public class AppointmentAvailabilityDAO implements AppointmentAvailabilityIDAO {
+
 	@Autowired
 	ApptAvailabilityRepository appointmentAvailabilityRepository;
 
@@ -20,4 +20,9 @@ public class AppointmentAvailabilityDAO implements  AppointmentAvailabilityIDAO{
 		return appointmentAvailabilityRepository.findAll();
 	}
 
+	@Override
+	public List<AppointmentAvailability> saveForRegistration(List<AppointmentAvailability> appointmentAvailabilities) {
+		return appointmentAvailabilityRepository.save(appointmentAvailabilities);
+	}
+	
 }

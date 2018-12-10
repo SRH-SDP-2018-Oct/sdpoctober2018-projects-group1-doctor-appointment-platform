@@ -1,10 +1,216 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>Patient Registration</title>
+<meta charset="ISO-8859-1" />
 </head>
+<style>
+div.solid {
+	border-style: solid;
+	background-color: #abcdef;
+	width: 20%;
+	height: 30%;
+	overflow: scroll;
+}
+
+table, th, td {
+	border: 1px solid grey;
+	border-collapse: collapse;
+	padding: 5px;
+}
+
+table tr:nth-child(odd) {
+	background-color: #f1f1f1;
+}
+
+table tr:nth-child(even) {
+	background-color: #ffffff;
+}
+</style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <body>
-	Patient Registration
+	<div data-ng-app="myApp" data-ng-controller="formCtrl">
+		<form name="myForm">
+			<label> Last Name: <input type="text" name="patientlastname"
+				ng-model="patientlastname" required>
+			</label> <br /> 
+			<label> First Name: <input type="text"
+				name="patientfirstname" ng-model="patientfirstname" required>
+			</label> <br /> 
+			<label> Street Address: <input type="text"
+				name="patientstreetname" ng-model="patientstreetname" required>
+			</label> <br /> 
+			<label> Area Address: <input type="text"
+				name="patientareaname" ng-model="patientareaname" required>
+			</label> <br /> 
+			<label> Postal Code: <input type="number"
+				name="patientpostalcode" ng-model="doctorpostalcode" required
+				min="10000" max="999999">
+			</label> <br /> 
+			City: <select ng-model="patientcity"
+				ng-options="x.cityName for x in citynames">
+				<option value="">--SelectCity--</option>
+			</select> <br /> 
+			<label> Email: <input type="email"
+				name="patientemail" ng-model="patientemail" required>
+			</label> <br /> 
+			<label> Contact: <input type="number"
+				name="patientContact" ng-model="patientContact" required>
+			</label> <br /> 
+			<label> Password: <input type="password"
+				name="doctorpassword" ng-model="patientpassword" required>
+			</label> <br /> 
+			<label> Gender: <select ng-model="patientgender">
+			<option value="">-Select Gender-</option>
+				<option value="Male">Male</option>
+				<option value="Female">Female</option>
+				</select>
+			</label>
+			<br/>
+			<label> Age: <input type="number"
+				name="patientAge" ng-model="patientAge" required>
+			</label>
+			 <br /> 
+			
+				<p>Guardian
+				<input type="checkbox" ng-model="isGuardian"></p>
+			
+			<!-- ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+			<div ng-show="isGuardian">
+				<label>Guardian Last Name: <input type="text" name="guardianlastname"
+					ng-model="guardianLastName" required>
+				</label> <br /> 
+				<label> First Name: <input type="text"
+					name="guardianfirstname" ng-model="guardianfirstname" required>
+				</label> <br /> 
+				<label> Street Address: <input type="text"
+					name="guardianstreetname" ng-model="guardianstreetname" required>
+				</label> <br /> 
+				<label> Area Address: <input type="text"
+					name="guardianpostalcode" ng-model="guardianpostalcode" required>
+				</label> <br /> 
+				<label> Postal Code: <input type="number"
+					name="patientpostalcode" ng-model="doctorpostalcode" required
+					min="10000" max="999999">
+				</label> <br /> 
+				City: <select ng-model="guardiancity"
+					ng-options="x.cityName for x in citynames">
+					<option value="">--SelectCity--</option>
+				</select> <br /> 
+				<label> Email: <input type="email"
+					name="guardianemail" ng-model="guardianemail" required>
+				</label> <br /> 
+				<label> Contact: <input type="number"
+					name="guardiancontact" ng-model="guardiancontact" required>
+				</label>
+			</div>
+			<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+			
+		</form>
+		<br/>
+		<button ng-click="doctorRegistration()" type="submit">Register</button>
+	</div>
+	<script>
+		var app = angular.module('myApp', []);
+		app.controller('formCtrl', function($scope, $location, $http) {
+			
+			$http.get("http://localhost:8888/app/cityvault/cities")
+			.then(function(response) {
+				$scope.citynames = response.data;
+			}, function myError(response) {
+				$scope.heading += response.statusText;
+			});
+			
+			$http.get("http://localhost:8888/app/cityvault/doctortypes")
+			.then(function(response) {
+				$scope.doctortypes = response.data;
+			}, function myError(response) {
+				$scope.heading += response.statusText;
+			});
+			
+			$http.get("http://localhost:8888/app/cityvault/slots")
+			.then(function(response) {
+				$scope.slots = response.data;
+			}, function myError(response) {
+				$scope.heading += response.statusText;
+			});
+			
+			$scope.doctorRegistration = function() {
+				
+				var registrationForm = {
+						doctorLastName:$scope.lastname, 
+						doctorFirstName:$scope.firstname,
+						doctorSteetAddress:$scope.doctorsteetaddress,
+						doctorAreaAddress:$scope.doctorareaaddress,
+						doctorPostalCode:$scope.doctorpostalcode,
+						doctorCity:$scope.doctorcity.cityId,
+						doctorEmail:$scope.doctoremail,
+						doctorContact:$scope.doctorcontact,
+						doctorPassword:$scope.doctorpassword,
+						doctorFees:$scope.doctorfees, 
+						doctorType:$scope.doctorType.doctorTypeId,
+						doctorExperience:$scope.doctorexperience,
+						doctorSunday:($scope.sundaySlot0 ? true : false),
+						doctorMonday:($scope.mondaySlot0 ? true : false),
+						doctorTuesday:($scope.tuesdaySlot0 ? true : false),
+						doctorWednesday:($scope.wednesdaySlot0 ? true : false),
+						doctorThursday:($scope.thursdaySlot0 ? true : false),
+						doctorFriday:($scope.fridaySlot0 ? true : false),
+						doctorSaturday:($scope.saturdaySlot0 ? true : false)
+					};
+				
+				var userreq = {
+						 method: 'POST',
+						 url: 'http://localhost:8888/app/cityvault/doctoruserregistration',
+						 data:  JSON.stringify(registrationForm)
+						}
+				$http(userreq)
+				.then(function(response) {
+							
+					/* var availabilityForm = [{
+						appointmentAvailabilityDoctor:1, 
+						appointmentAvailabilitySlotDay:'Sunday',
+						appointmentAvailabilityDoctorType:1,
+						appointmentAvailabilityDoctorCity:1,
+						appointmentAvailabilitySlotTime1:true,
+						appointmentAvailabilitySlotTime2:true,
+						appointmentAvailabilitySlotTime3:true,
+						appointmentAvailabilitySlotTime4:true,
+						appointmentAvailabilitySlotTime5:true,
+						appointmentAvailabilitySlotTime6:true,
+						appointmentAvailabilitySlotTime7:true,
+						appointmentAvailabilitySlotTime8:true,
+						appointmentAvailabilitySlotTime9:true,
+						appointmentAvailabilitySlotTime9:true,
+						appointmentAvailabilitySlotTime10:true,
+						appointmentAvailabilitySlotTime11:true,
+						}];
+							
+							var availreq = {
+									 method: 'POST',
+									 url: 'http://localhost:8888/app/cityvault/doctoruserregistration/availability',
+									 data:  JSON.stringify(availabilityForm)
+									}
+							$http(availreq)
+							.then(function(response) {
+										alert("Registration Successful");
+										
+										
+									},
+									function myError(response) {
+										alert("bekar");
+										$scope.heading += response.statusText;
+									}); */
+									
+							window.location = "http://localhost:8888/app/appointmentbookingapp/doctordashboard";
+						},
+						function myError(response) {
+							alert("bekar");
+							$scope.heading += response.statusText;
+						});
+			};
+			
+		});
+	</script>
 </body>
 </html>

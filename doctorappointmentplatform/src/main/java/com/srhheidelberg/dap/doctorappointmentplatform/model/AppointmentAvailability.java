@@ -11,6 +11,10 @@ import javax.persistence.Table;
 @Table(name="appointmentavailability")
 public class AppointmentAvailability {
 	
+	public AppointmentAvailability() {
+		
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="appointmentavailabilityid")
@@ -21,6 +25,12 @@ public class AppointmentAvailability {
 	
 	@Column(name="appointmentavailabilityslotday")
 	private String appointmentAvailabilitySlotDay;
+	
+	@Column(name="appointmentavailabilitydoctortype")
+	private Integer appointmentAvailabilityDoctorType;
+	
+	@Column(name="appointmentavailabilitydoctorcity")
+	private Integer appointmentAvailabilityDoctorCity;
 	
 	@Column(name="appointmentavailabilityslottime1")
 	private Boolean appointmentAvailabilitySlotTime1;
@@ -63,6 +73,8 @@ public class AppointmentAvailability {
 		return "AppointmentAvailability [appointmentAvailabilityId=" + appointmentAvailabilityId
 				+ ", appointmentAvailabilityDoctor=" + appointmentAvailabilityDoctor
 				+ ", appointmentAvailabilitySlotDay=" + appointmentAvailabilitySlotDay
+				+ ", appointmentAvailabilityDoctorType=" + appointmentAvailabilityDoctorType
+				+ ", appointmentAvailabilityDoctorCity=" + appointmentAvailabilityDoctorCity
 				+ ", appointmentAvailabilitySlotTime1=" + appointmentAvailabilitySlotTime1
 				+ ", appointmentAvailabilitySlotTime2=" + appointmentAvailabilitySlotTime2
 				+ ", appointmentAvailabilitySlotTime3=" + appointmentAvailabilitySlotTime3
@@ -75,6 +87,22 @@ public class AppointmentAvailability {
 				+ ", appointmentAvailabilitySlotTime10=" + appointmentAvailabilitySlotTime10
 				+ ", appointmentAvailabilitySlotTime11=" + appointmentAvailabilitySlotTime11
 				+ ", appointmentAvailabilitySlotTime12=" + appointmentAvailabilitySlotTime12 + "]";
+	}
+
+	public Integer getAppointmentAvailabilityDoctorType() {
+		return appointmentAvailabilityDoctorType;
+	}
+
+	public void setAppointmentAvailabilityDoctorType(Integer appointmentAvailabilityDoctorType) {
+		this.appointmentAvailabilityDoctorType = appointmentAvailabilityDoctorType;
+	}
+
+	public Integer getAppointmentAvailabilityDoctorCity() {
+		return appointmentAvailabilityDoctorCity;
+	}
+
+	public void setAppointmentAvailabilityDoctorCity(Integer appointmentAvailabilityDoctorCity) {
+		this.appointmentAvailabilityDoctorCity = appointmentAvailabilityDoctorCity;
 	}
 
 	public Integer getAppointmentAvailabilityId() {

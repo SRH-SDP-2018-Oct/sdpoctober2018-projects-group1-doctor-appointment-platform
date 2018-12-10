@@ -7,4 +7,6 @@ import com.srhheidelberg.dap.doctorappointmentplatform.model.AppointmentAvailabi
 public interface AppointmentAvailabilityIDAO {
 	
 	List<AppointmentAvailability> findAll();
+
+	List<AppointmentAvailability> saveForRegistration(List<AppointmentAvailability> appointmentAvailabilities);
 }

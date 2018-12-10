@@ -20,6 +20,10 @@ public class AppointmentBookingDAO implements AppointmentBookingIDAO {
 	@Autowired
 	ApptBookingRepository appointmentBookingRepository;
 
+	public AppointmentBooking save(AppointmentBooking appointmentBooking) {
+		return appointmentBookingRepository.save(appointmentBooking);
+	}
+	
 	@Override
 	public AppointmentBooking getById(Integer id) {
 		return appointmentBookingRepository.getOne(id);
@@ -132,5 +136,6 @@ public class AppointmentBookingDAO implements AppointmentBookingIDAO {
 		}
 		return statuswiseAppointments;
 	}
+	
 	
 }

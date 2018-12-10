@@ -10,12 +10,12 @@ public class DoctorWebController {
 	
 	@RequestMapping(value="/doctorlogin", method=RequestMethod.GET)
 	public String doctorLoginPageDisplay() {
-		return "/patientlogin";//appointmentbookingapp.patientlogin
+		return "/doctorlogin";
 	}
 	
 	@RequestMapping(value="/doctordashboard", method=RequestMethod.GET)
 	public String doctorDashboardPageDisplay() {
-		return "/patientdashboard";
+		return "/doctordashboard";
 	}
 	
 	@RequestMapping(value="/doctorappointment", method=RequestMethod.GET)
@@ -25,7 +25,7 @@ public class DoctorWebController {
 	
 	@RequestMapping(value="/doctorregistration", method=RequestMethod.GET)
 	public String doctorRegistrationPageDisplay() {
-		return "/patientregistration";
+		return "/doctorregistration";
 	}
 
 }

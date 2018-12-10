@@ -39,32 +39,33 @@ table tr:nth-child(even) {
 				ng-model="password" ng-minlength="3" ng-maxlength="10">
 			</label>
 		</form>
-		<button ng-click="patientLogin()">Login</button>
+		<button ng-click="doctorLogin()">Login</button><br/>
 		<button ng-click="doctorSignup()">Sign up</button>
 	</div>
 	<script>
 		var app = angular.module('myApp', []);
 		app.controller('formCtrl', function($scope, $location, $http) {
-
+		
 			$scope.doctorSignup = function() {
-				window.location = "http://localhost:8888/app/appointmentbookingapp/patientregistration";
+				window.location = "http://localhost:8888/app/appointmentbookingapp/doctorregistration";
 			};
 			
-			$scope.patientLogin = function() {
+			$scope.doctorLogin = function() {
+				//alert();
 				
 				if($scope.username == null | $scope.password == null){
 					alert("Please Provide correct Data");
 				}
 				else {
-				var url = "http://localhost:8888/app/cityvault/patientuserlogin/" + $scope.username;
+				alert($scope.username);
+				var url = "http://localhost:8888/app/cityvault/doctoruserlogin/" + $scope.username;
 				$http.get(url)
 				.then(function(response) {
 							//window.location = "http://localhost:8888/app/"
-							$scope.patientuser = response.data.patientPassword;
-							
-							if($scope.password == response.data.patientPassword) {
-								document.cookie = "patientId=" + response.data.patientId;
-								window.location = "http://localhost:8888/app/appointmentbookingapp/patientdashboard";
+							document.cookie = "doctorId=" + response.data.doctorId ;
+							//alert(document.cookie.doctorId);
+							if($scope.password == response.data.doctorPassword) {
+								window.location = "http://localhost:8888/app/appointmentbookingapp/doctordashboard";
 							}
 							else {
 								window.location = "http://localhost:8888/app/"

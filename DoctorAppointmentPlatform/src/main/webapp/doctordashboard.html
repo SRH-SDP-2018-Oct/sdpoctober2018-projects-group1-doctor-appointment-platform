@@ -104,7 +104,6 @@ table tr:nth-child(even) {
 			<tr>
 				<th>Upcoming</th>
 				<th>Previous</th>
-				<th>Search</th>
 			</tr>
 			<tr>
 
@@ -152,31 +151,10 @@ table tr:nth-child(even) {
 							</tr>
 						</table>
 					</div></td>
-				<td><div class="searchappointments">
-						<div class="solid">
-							<p class="solid">{{heading}}</p>
-							City: <select ng-model="selectedCity"
-								ng-options="x.cityName for x in citynames">
-								<option value="">--SelectCity--</option>
-							</select> <br /> Doctor Types: <select ng-model="selectedDoctorType"
-								ng-options="x.doctorTypeName for x in doctortypes">
-								<option value="">--Select Doctor Type--</option>
-							</select> <br /> Slot Types: <select ng-model="selectedSlot"
-								ng-options="x.slotName for x in slots"><option value="">--Select
-									Slot Type--</option></select> <br /> Date Picker: <input type="date"
-								id="selectedDate" name="selectedDate" ng-model="selectedDate"
-								placeholder="yyyy-MM-dd" min="{{todayDate}}" max="{{furtherDate}}"
-								required />
-							<br />Search Doctors:
-							<button class="btn btn-info prevnext pull-right"
-								ng-click="getAvailableDoctors(selectedCity, selectedDoctorType, selectedSlot, selectedDate)">Search</button>
-						</div>
-					</div></td>
 			</tr>
 			<tr>
 				<th>Remaining</th>
 				<th>Misc.</th>
-				<th>Book.</th>
 			</tr>
 			<tr>
 				<td><div class="feebackremaingappointments">
@@ -202,24 +180,7 @@ table tr:nth-child(even) {
 						</table>
 					</div></td>
 				<td><div class="patienttodayappointments"></div></td>
-				<td><div class="bookappointments">
-						<table>
-							<th>Select Doctor</th>
-							<th>Name</th>
-							<th>Fee</th>
-							<th>Address</th>
-							<tr ng-repeat="doctor in availabledoctors">
-								<td><input type="radio" ng-model="selectedDoctor"
-									value="{{doctor.doctorUserId}}" ng-click="getSelectedDoctor(selectedDoctor)"></td>
-								<td>{{doctor.doctorFirstName}} {{doctor.doctorLastName}}</td>
-								<td>{{doctor.doctorFees}}</td>
-								<td>{{doctor.doctorSteetAddress}},
-									{{doctor.doctorAreaAddress}}, {{selectedCity.cityName}},
-									{{doctor.doctorPostalCode}}.</td>
-							</tr>
-						</table>
-						<button ng-click="createPatientBooking(selectedDoctor)">Book Slot</button>
-					</div></td>
+				
 			</tr>
 			<tr>
 			<td>Create Report</td>
@@ -232,26 +193,6 @@ table tr:nth-child(even) {
 				.controller(
 						'patientdashboardcontroller',
 						function($scope, $location, $http) {
-							
-							var patientId = document.cookie.patientId;
-							
-							function formatDate(date) {
-							    var d = new Date(date),
-							        month = '' + (d.getMonth() + 1),
-							        day = '' + d.getDate(),
-							        year = d.getFullYear();
-
-							    if (month.length < 2) month = '0' + month;
-							    if (day.length < 2) day = '0' + day;
-
-							    return [year, month, day].join('-');
-							}
-							var today = new Date();
-							var newdate = new Date(today);
-						    newdate.setDate(newdate.getDate() + 14);
-							$scope.todayDate = formatDate(today);
-							$scope.furtherDate = formatDate(newdate);
-							
 							//Upcoming
 							$http
 									.get(
@@ -330,6 +271,7 @@ table tr:nth-child(even) {
 							//Get Available Doctors
 							$scope.getAvailableDoctors = function(selectedCity,
 									selectedDoctorType, selectedSlot, selectedDate) {
+								//alert($scope.selectedDate);
 								
 								if (selectedCity != null
 										& selectedDoctorType != null

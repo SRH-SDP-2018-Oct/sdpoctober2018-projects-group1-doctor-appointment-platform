@@ -82,7 +82,7 @@ table tr:nth-child(even) {
 						'formCtrl',
 						function($scope, $location, $http) {
 							$scope.heading = "Search Available Doctors";
-							$http.get("http://localhost:8888/cityvault/cities")
+							$http.get("http://localhost:8888/app/cityvault/cities")
 									.then(function(response) {
 										$scope.citynames = response.data;
 									}, function myError(response) {
@@ -90,13 +90,13 @@ table tr:nth-child(even) {
 									});
 							$http
 									.get(
-											"http://localhost:8888/cityvault/doctortypes")
+											"http://localhost:8888/app/cityvault/doctortypes")
 									.then(function(response) {
 										$scope.doctortypes = response.data;
 									}, function myError(response) {
 										$scope.heading += response.statusText;
 									});
-							$http.get("http://localhost:8888/cityvault/slots")
+							$http.get("http://localhost:8888/app/cityvault/slots")
 									.then(function(response) {
 										$scope.slots = response.data;
 									}, function myError(response) {
@@ -112,7 +112,7 @@ table tr:nth-child(even) {
 										& selectedSlot != null) {
 									console.log(selectedCity,
 											selectedDoctorType, selectedSlot);
-									var url = "http://localhost:8888/cityvault/availabledoctors/";
+									var url = "http://localhost:8888/app/cityvault/availabledoctors/";
 									url += selectedCity.cityId + "/";
 									url += selectedDoctorType.doctorTypeId
 											+ "/";

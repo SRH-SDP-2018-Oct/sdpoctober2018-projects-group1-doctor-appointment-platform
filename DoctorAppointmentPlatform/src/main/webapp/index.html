@@ -9,9 +9,9 @@
 <body>
 	<div data-ng-app="myApp" data-ng-controller="cnt">
 	<br/>
-		<button ng-click="goToPatientLogin()">Patient Login</button>
+		<button ng-click="goToPatientLogin()">Patient Login/Signup</button>
 		<br/><br/>
-		<button ng-click="goToPatientLogin()">Doctor Login</button>
+		<button ng-click="goToDoctorLogin()">Doctor Login/Signup</button>
 	</div>
 	<script>
 		var app = angular.module('myApp', []);
@@ -19,6 +19,11 @@
 			
 			$scope.goToPatientLogin = function() {
 				window.location = "http://localhost:8888/app/appointmentbookingapp/patientlogin"
+				
+			};
+			
+			$scope.goToDoctorLogin = function() {
+				window.location = "http://localhost:8888/app/appointmentbookingapp/doctorlogin"
 				
 			};
 			
