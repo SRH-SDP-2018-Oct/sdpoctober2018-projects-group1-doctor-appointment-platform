@@ -27,5 +27,10 @@ public class PatientWebController {
 	public String patientRegistrationPageDisplay() {
 		return "/patientregistration";
 	}
+	
+	@RequestMapping(value="/patientfeedbackappointment", method=RequestMethod.GET)
+	public String patientFeedbackPageDisplay() {
+		return "/patientregistration";
+	}
 
 }

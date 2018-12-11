@@ -7,100 +7,16 @@
 
 <title>Patient Dashboard</title>
 </head>
-<style>
-div.upcomingappointments {
-	border-style: solid;
-	background-color: #abcdef;
-	width: 500px;
-	height: 300px;
-	overflow: scroll;
-	display: block;
-}
-
-div.previousappointments {
-	border-style: solid;
-	background-color: #a1c1e1;
-	width: 500px;
-	height: 300px;
-	overflow: scroll;
-	display: block;
-}
-
-div.searchappointments {
-	border-style: solid;
-	background-color: #abcdef;
-	width: 500px;
-	height: 300px;
-	overflow: scroll;
-	display: block;
-}
-
-div.feebackremaingappointments {
-	border-style: solid;
-	background-color: #abcdef;
-	width: 500px;
-	height: 300px;
-	overflow: scroll;
-	display: block;
-}
-
-div.patienttodayappointments {
-	border-style: solid;
-	background-color: #abcdef;
-	width: 500px;
-	height: 300px;
-	overflow: scroll;
-	display: block;
-}
-
-div.bookappointments {
-	border-style: solid;
-	background-color: #abcdef;
-	width: 500px;
-	height: 300px;
-	overflow: scroll;
-	display: block;
-}
-
-table, th, td {
-	border: 1px solid grey;
-	border-collapse: collapse;
-	padding: 5px;
-}
-
-table tr:nth-child(odd) {
-	background-color: #f1f1f1;
-}
-
-table tr:nth-child(even) {
-	background-color: #ffffff;
-}
-</style>
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	crossorigin="anonymous">
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-	crossorigin="anonymous"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-
+<link rel = "stylesheet"
+   type = "text/css"
+   href = "/app/main.css" />
 <body>
 	<div data-ng-app="patientdashboardapp"
 		data-ng-controller="patientdashboardcontroller">
 
-		<table>
+		<table class='patient-table'>
 			<tr>
 				<th>Upcoming</th>
 				<th>Previous</th>
@@ -108,7 +24,7 @@ table tr:nth-child(even) {
 			<tr>
 
 				<td><div class="upcomingappointments center">
-						<table>
+						<table class='nested-table'>
 							<tr>
 								<th>Slot</th>
 								<th>Patient</th>
@@ -118,8 +34,10 @@ table tr:nth-child(even) {
 							</tr>
 							<tr
 								ng-repeat="upcomingappointment in patientupcomingappointments">
-								<td>{{slots[upcomingappointment.appointmentBookingSlotTime-1].slotName
-									}}</td>
+								<td><button class="btn btn-info prevnext pull-right" ng-click="openAppointment(upcomingappointment.appointmentBookingId)">
+								({{slots[upcomingappointment.appointmentBookingSlotTime-1].slotStartTime
+									}}-{{slots[upcomingappointment.appointmentBookingSlotTime-1].slotEndTime
+									}})</button></td>
 								<td>{{patientusers[upcomingappointment.appointmentBookingSlotTime-1].patientLastName
 									}}</td>
 								<td>{{doctorusers[upcomingappointment.appointmentBookingSlotTime-1].doctorLastName
@@ -130,7 +48,7 @@ table tr:nth-child(even) {
 						</table>
 					</div></td>
 				<td><div class="previousappointments">
-						<table>
+						<table class='nested-table'>
 							<tr>
 								<th>Slot</th>
 								<th>Patient</th>
@@ -140,8 +58,10 @@ table tr:nth-child(even) {
 							</tr>
 							<tr
 								ng-repeat="previousappointment in patientpreviousappointments">
-								<td>{{slots[previousappointment.appointmentBookingSlotTime-1].slotName
-									}}</td>
+								<td><button class="btn btn-info prevnext pull-right" ng-click="openAppointment(previousappointment.appointmentBookingId)">
+								({{slots[previousappointment.appointmentBookingSlotTime-1].slotStartTime
+									}}-{{slots[previousappointment.appointmentBookingSlotTime-1].slotEndTime
+									}})</button></td>
 								<td>{{patientusers[previousappointment.appointmentBookingSlotTime-1].patientLastName
 									}}</td>
 								<td>{{doctorusers[previousappointment.appointmentBookingSlotTime-1].doctorLastName
@@ -153,12 +73,12 @@ table tr:nth-child(even) {
 					</div></td>
 			</tr>
 			<tr>
-				<th>Remaining</th>
+				<th>Remaining Treatment</th>
 				<th>Misc.</th>
 			</tr>
 			<tr>
 				<td><div class="feebackremaingappointments">
-						<table>
+						<table class='nested-table'>
 							<tr>
 								<th>Slot</th>
 								<th>Patient</th>
@@ -166,24 +86,53 @@ table tr:nth-child(even) {
 								<th>Date</th>
 								<th>Status</th>
 							</tr>
-							<tr
-								ng-repeat="feebackremaingappointment in patientfeebackremaingappointments">
-								<td>{{slots[feebackremaingappointment.appointmentBookingSlotTime-1].slotName
+							<tr ng-repeat="statusremaingappointment in patientstatusremaingappointments">
+								<td><button class="btn btn-info prevnext pull-right" ng-click="openStatusAppointment(statusremaingappointment.appointmentBookingId)">
+								({{slots[statusremaingappointment.appointmentBookingSlotTime-1].slotStartTime
+									}}-{{slots[statusremaingappointment.appointmentBookingSlotTime-1].slotEndTime
+									}})</button></td>
+								<td>{{patientusers[statusremaingappointment.appointmentBookingSlotTime-1].patientLastName
 									}}</td>
-								<td>{{patientusers[feebackremaingappointment.appointmentBookingSlotTime-1].patientLastName
+								<td>{{doctorusers[statusremaingappointment.appointmentBookingSlotTime-1].doctorLastName
 									}}</td>
-								<td>{{doctorusers[feebackremaingappointment.appointmentBookingSlotTime-1].doctorLastName
-									}}</td>
-								<td>{{feebackremaingappointment.appointmentBookingSlotDate}}</td>
-								<td>{{feebackremaingappointment.appointmentBookingStatus }}</td>
+								<td>{{statusremaingappointment.appointmentBookingSlotDate}}</td>
+								<td>{{statusremaingappointment.appointmentBookingStatus }}</td>
 							</tr>
 						</table>
 					</div></td>
-				<td><div class="patienttodayappointments"></div></td>
+				<td><div class="patienttodayappointments" ng-show="isTreatment">
+					<Label> Treatment Details: <textarea name="apptTreatment" ng-model="apptTreatment" required></textarea></Label><br/> 
+					<label> Prescription: <textarea name="apptPrescription" ng-model="apptPrescription" required></textarea></label> <br/>
+					<button ng-click="submitTreatmentAppointment()">Submit Feedback</button>
+					<br/>
+					<button ng-click="closeAppointment()">Close</button>
+				</div>
+				<div class="patienttodayappointments" ng-show="isAppointment">
+				<div>
+					{{appointmentBookingId}}<br/>
+					
+					Date: {{appointment.appointmentBookingSlotDate}}<br/>
+					Day: {{appointment.appointmentBookingSlotDay}}<br/>
+					Time: {{slots[appointment.appointmentBookingSlotTime-1].slotStartTime}}-{{slots[appointment.appointmentBookingSlotTime-1].slotEndTime}}<br/>
+					Doctor: {{patientusers[appointment.appointmentBookingPatient-1].patientLastName}}<br/>
+					Patient: {{doctorusers[appointment.appointmentBookingDoctor-1].doctorLastName}}<br/>
+					Treatment: {{appointment.appointmentBookingTreatment}}<br/>
+					Prescription: {{appointment.appointmentBookingPrescription}}<br/>
+					Rating: {{appointment.appointmentBookingRating}}<br/>
+					Feedback: {{appointment.appointmentBookingFeedback}}<br/>
+					Status: {{appointment.appointmentBookingStatus}}<br/>
+					Type: {{doctortypes[appointment.appointmentBookingDoctorType].doctorTypeName}}<br/>
+					City: {{citynames[appointment.appointmentBookingDoctorCity-1].cityName}}
+				</div>	
+					
+					<button ng-click="closeAppointment()">Close</button>
+				</div>
+				</td>
 				
 			</tr>
 			<tr>
 			<td>Create Report</td>
+			<td><button ng-click="logout()" >Logout</button></td>
 			</tr>
 		</table>
 	</div>
@@ -193,10 +142,116 @@ table tr:nth-child(even) {
 				.controller(
 						'patientdashboardcontroller',
 						function($scope, $location, $http) {
+							
+							//Cookie Setup
+							var expDays = 30;
+							var exp = new Date();
+							exp.setTime(exp.getTime() + (expDays*24*60*60*1000));
+							function getCookieVal (offset) {
+								var endstr = document.cookie.indexOf (";", offset);
+								if (endstr == -1)
+								endstr = document.cookie.length;
+								return unescape(document.cookie.substring(offset, endstr));
+								}
+							function GetCookie(name) {
+								var arg = name + "=";
+								var alen = arg.length;
+								var clen = document.cookie.length;
+								var i = 0;
+								while (i < clen) {
+									var j = i + alen;
+									if (document.cookie.substring(i, j) == arg)
+										return getCookieVal(j);
+									i = document.cookie.indexOf(" ", i) + 1;
+									if (i == 0)
+										break;
+								}
+								return null;
+							}
+							function SetCookie(name, value) {
+								
+								var argv = SetCookie.arguments;
+								var argc = SetCookie.arguments.length;
+								var expires = (argc > 2) ? argv[2] : null;
+								var path = (argc > 3) ? argv[3] : null;
+								var domain = (argc > 4) ? argv[4] : null;
+								var secure = (argc > 5) ? argv[5] : false;
+								document.cookie = name
+										+ "="
+										+ escape(value)
+										+ ((expires == null) ? ""
+												: ("; expires=" + expires
+														.toGMTString()))
+										+ ((path == null) ? ""
+												: ("; path=" + path))
+										+ ((domain == null) ? ""
+												: ("; domain=" + domain))
+										+ ((secure == true) ? "; secure" : "");
+							}
+							function DeleteCookie(name) {
+								var exp = new Date();
+								exp.setTime(exp.getTime() - 1);
+								var cval = GetCookie(name);
+								document.cookie = name + "=" + cval
+										+ "; expires=" + exp.toGMTString();
+							}
+							
+							//doctorId
+							$scope.cookieDoctorId = GetCookie("doctorId");
+							alert($scope.cookieDoctorId);
+							
+							//OpenAppointment
+							$scope.openAppointment = function(appointmentBookingId) {
+								$scope.isTreatment = false;
+								$scope.isAppointment = true;
+								$scope.appointmentBookingId = appointmentBookingId;
+								
+								$http.get("http://localhost:8888/app/cityvault/appointmentbooking/" + appointmentBookingId)
+								.then(function(response) {
+											$scope.appointment = response.data;
+										},
+										function myError(response) {
+											$scope.heading += response.statusText;
+										});
+								//window.location = "http://localhost:8888/app/cityvault/appointmentbooking/id";
+							};
+							$scope.openStatusAppointment = function(appointmentBookingId) {
+								$scope.isAppointment = false;
+								$scope.isTreatment = true;//doctortreatedappointment
+								$scope.appointmentId = appointmentBookingId;
+							};
+							$scope.closeAppointment = function() {
+								$scope.isAppointment = false;
+								$scope.isTreatment = false;
+							}
+							$scope.submitTreatmentAppointment = function(appointmentBookingId) {
+								var treatmentUpdate = {
+										appointmentBookingTreatment: $scope.apptTreatment,
+										  appointmentBookingId: $scope.appointmentId,
+										  appointmentBookingPrescription: $scope.apptPrescription,
+										  appointmentBookingStatus: "Treated"
+										};
+								var treatmentreq = {
+									method : 'PUT',
+									url : 'http://localhost:8888/app/cityvault/doctortreatedappointment',
+									data : JSON.stringify(treatmentUpdate)
+								}
+
+								$http(treatmentreq).then(
+												function(response) {
+													$scope.isFeedback = false;
+													location.reload();
+												},
+												function myError(response) {
+													$scope.heading += response.statusText;
+												});
+								$scope.isTreatment = false;
+							}
+							
 							//Upcoming
 							$http
 									.get(
-											"http://localhost:8888/app/cityvault/patientupcomingappointments")
+											"http://localhost:8888/app/cityvault/patientupcomingappointments/"+$scope.cookieDoctorId)
 									.then(
 											function(response) {
 												$scope.patientupcomingappointments = response.data;
@@ -207,7 +262,7 @@ table tr:nth-child(even) {
 							//Previous
 							$http
 									.get(
-											"http://localhost:8888/app/cityvault/patientpreviousappointments")
+											"http://localhost:8888/app/cityvault/patientpreviousappointments/"+$scope.cookieDoctorId)
 									.then(
 											function(response) {
 												$scope.patientpreviousappointments = response.data;
@@ -215,13 +270,13 @@ table tr:nth-child(even) {
 											function myError(response) {
 												$scope.heading += response.statusText;
 											});
-							//Feedbackremaining
+							//Treatmentkremaining
 							$http
 									.get(
-											"http://localhost:8888/app/cityvault/patientfeebackremaingappointments")
+											"http://localhost:8888/app/cityvault/doctorstatusremainingappointments/"+$scope.cookieDoctorId)
 									.then(
 											function(response) {
-												$scope.patientfeebackremaingappointments = response.data;
+												$scope.patientstatusremaingappointments = response.data;
 											},
 											function myError(response) {
 												$scope.heading += response.statusText;
@@ -254,15 +309,20 @@ table tr:nth-child(even) {
 									}, function myError(response) {
 										$scope.heading += response.statusText;
 									});
+							
 							//Cities
-							$http.get("http://localhost:8888/app/cityvault/cities")
-							.then(function(response) {
-								$scope.citynames = response.data;
-							}, function myError(response) {
-								$scope.heading += response.statusText;
-							});
+							$http
+									.get(
+											"http://localhost:8888/app/cityvault/cities")
+									.then(function(response) {
+										$scope.citynames = response.data;
+									}, function myError(response) {
+										$scope.heading += response.statusText;
+									});
 							//Doctor Types
-							$http.get("http://localhost:8888/app/cityvault/doctortypes")
+							$http
+									.get(
+											"http://localhost:8888/app/cityvault/doctortypes")
 									.then(function(response) {
 										$scope.doctortypes = response.data;
 									}, function myError(response) {
@@ -270,14 +330,15 @@ table tr:nth-child(even) {
 									});
 							//Get Available Doctors
 							$scope.getAvailableDoctors = function(selectedCity,
-									selectedDoctorType, selectedSlot, selectedDate) {
+									selectedDoctorType, selectedSlot,
+									selectedDate) {
 								//alert($scope.selectedDate);
-								
+
 								if (selectedCity != null
 										& selectedDoctorType != null
 										& selectedSlot != null
 										& selectedDate != null) {
-									console.log("kosko" , selectedCity,
+									console.log("kosko", selectedCity,
 											selectedDoctorType, selectedSlot);
 									var url = "http://localhost:8888/app/cityvault/availabledoctors/";
 									$scope.selectedCityId = selectedCity.cityId;
@@ -285,11 +346,14 @@ table tr:nth-child(even) {
 									$scope.selectedSlotId = selectedSlot.slotId;
 									$scope.selectedDateScope = $scope.selectedDate;
 									url += selectedCity.cityId + "/";
-									url += selectedDoctorType.doctorTypeId + "/";
+									url += selectedDoctorType.doctorTypeId
+											+ "/";
 									url += selectedSlot.slotId + "/";
 									url += selectedDate;
-									$http.get(url)
-											.then(function(response) {
+									$http
+											.get(url)
+											.then(
+													function(response) {
 														$scope.isDoctorsAvailable = true;
 														$scope.availabledoctors = response.data;
 													},
@@ -301,58 +365,64 @@ table tr:nth-child(even) {
 								}
 
 							};
-							
-							$scope.getSelectedDoctor = function(selectedDoctor) {
-								$scope.selectedDoctorId = selectedDoctor;
 
-							};
-							
-							$scope.createPatientBooking = function(selectedDoctor) {
-								
-								if(selectedDoctor==null) {
+							//logout
+							$scope.logout = function() {
+								DeleteCookie("doctorId");
+								alert("logged out!!!");
+								location.reload();
+								location.replace("http://localhost:8888/app/");
+							}
+
+							$scope.createPatientBooking = function(
+									selectedDoctor) {
+
+								if (selectedDoctor == null) {
 									alert("Please Select Doctor First");
-								}
-								else {
-								function formatDate(date) {
-								    var d = new Date(date),
-								        month = '' + (d.getMonth() + 1),
-								        day = '' + d.getDate(),
-								        year = d.getFullYear();
+								} else {
+									function formatDate(date) {
+										var d = new Date(date), month = ''
+												+ (d.getMonth() + 1), day = ''
+												+ d.getDate(), year = d
+												.getFullYear();
 
-								    if (month.length < 2) month = '0' + month;
-								    if (day.length < 2) day = '0' + day;
+										if (month.length < 2)
+											month = '0' + month;
+										if (day.length < 2)
+											day = '0' + day;
 
-								    return [year, month, day].join('-');
-								}
-								var text = {
-										appointmentBookingSlotDate:formatDate($scope.selectedDateScope), 
-										appointmentBookingSlotDay:'Monday',
-										appointmentBookingSlotTime:$scope.selectedSlotId,
-										appointmentBookingDoctor:1,
-										appointmentBookingPatient:1,
-										appointmentBookingRating:3,
-										appointmentBookingStatus:'Booked',
-										appointmentBookingDoctorType:$scope.selectedTypeId,
-										appointmentBookingDoctorCity:$scope.selectedCityId,
+										return [ year, month, day ].join('-');
+									}
+									var text = {
+										appointmentBookingSlotDate : formatDate($scope.selectedDateScope),
+										appointmentBookingSlotDay : 'Monday',
+										appointmentBookingSlotTime : $scope.selectedSlotId,
+										appointmentBookingDoctor : 1,
+										appointmentBookingPatient : 1,
+										appointmentBookingRating : 3,
+										appointmentBookingStatus : 'Booked',
+										appointmentBookingDoctorType : $scope.selectedTypeId,
+										appointmentBookingDoctorCity : $scope.selectedCityId,
 									};
-								
-								console.log(text);
-								
-								var req = {
-										 method: 'POST',
-										 url: 'http://localhost:8888/app/cityvault/bookpatientappointment',
-										 data:  JSON.stringify(text)
-										}
-								$http(req)
-								.then(function(response) {
-											alert("Appointment Booked");
-											window.location = "http://localhost:8888/app/appointmentbookingapp/patientdashboard";
-											
-										},
-										function myError(response) {
-											alert("bekar");
-											$scope.heading += response.statusText;
-										});
+
+									console.log(text);
+
+									var req = {
+										method : 'POST',
+										url : 'http://localhost:8888/app/cityvault/bookpatientappointment',
+										data : JSON.stringify(text)
+									}
+									$http(req)
+											.then(
+													function(response) {
+														alert("Appointment Booked");
+														window.location = "http://localhost:8888/app/appointmentbookingapp/patientdashboard";
+
+													},
+													function myError(response) {
+														alert("bekar");
+														$scope.heading += response.statusText;
+													});
 								}
 							};
 

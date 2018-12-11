@@ -29,4 +29,9 @@ public class PatientUserDAO implements PatientUserIDAO {
 	public PatientUser findByPatientEmail(String patientEmail) {
 		return patientUserRepository.findByPatientEmail(patientEmail);
 	}
+	
+	@Override
+	public PatientUser save(PatientUser patientUser) {
+		return patientUserRepository.save(patientUser);
+	}
 }

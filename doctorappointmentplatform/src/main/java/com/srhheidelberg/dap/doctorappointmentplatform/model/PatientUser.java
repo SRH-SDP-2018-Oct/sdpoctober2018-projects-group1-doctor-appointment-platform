@@ -7,8 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="patientuser")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class PatientUser {
 
 	@Id
@@ -28,10 +31,10 @@ public class PatientUser {
 	@Column(name="patientcontact")
 	private Long patientContact;
 
-	@Column(name="patientstreetname")
+	@Column(name="patientareaname")
 	private String patientStreetName;
 
-	@Column(name="patientareaname")
+	@Column(name="patientstreetname")
 	private String patientAreaName;
 
 	@Column(name="patientcity")

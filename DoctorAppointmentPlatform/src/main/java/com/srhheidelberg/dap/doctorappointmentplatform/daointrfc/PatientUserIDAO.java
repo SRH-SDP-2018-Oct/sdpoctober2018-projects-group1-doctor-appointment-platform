@@ -12,4 +12,6 @@ public interface PatientUserIDAO {
 
 	PatientUser findByPatientEmail(String patientEmail);
 
+	PatientUser save(PatientUser patientUser);
+
 }

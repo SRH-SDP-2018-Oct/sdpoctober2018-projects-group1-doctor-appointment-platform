@@ -9,5 +9,6 @@ public interface DoctorUserRepository extends JpaRepository<DoctorUser, Integer>
 	DoctorUser findByDoctorEmail(String email);
 	
 	DoctorUser save(DoctorUser doctorUser);
-
+	
+	DoctorUser getByDoctorUserId(Integer doctorUserId);
 }

@@ -6,12 +6,17 @@
 </head>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<link rel = "stylesheet"
+   type = "text/css"
+   href = "main.css" />
 <body>
-	<div data-ng-app="myApp" data-ng-controller="cnt">
+	<div data-ng-app="myApp" data-ng-controller="cnt" class="login-sec row">
 	<br/>
-		<button ng-click="goToPatientLogin()">Patient Login/Signup</button>
+	<div class="col-md-6">
+		<button ng-click="goToPatientLogin()" class='btn btn-default'>Patient Login/Signup</button></div>
 		<br/><br/>
-		<button ng-click="goToDoctorLogin()">Doctor Login/Signup</button>
+	<div class="col-md-6">
+		<button ng-click="goToDoctorLogin()" class='btn btn-default'>Doctor Login/Signup</button></div>
 	</div>
 	<script>
 		var app = angular.module('myApp', []);

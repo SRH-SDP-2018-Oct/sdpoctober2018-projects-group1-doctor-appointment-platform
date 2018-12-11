@@ -7,8 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="appointmentavailability")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class AppointmentAvailability {
 	
 	public AppointmentAvailability() {
@@ -16,7 +19,7 @@ public class AppointmentAvailability {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	@Column(name="appointmentavailabilityid")
 	private Integer appointmentAvailabilityId;
 	

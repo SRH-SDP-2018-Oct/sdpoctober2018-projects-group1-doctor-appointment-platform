@@ -45,7 +45,7 @@ table tr:nth-child(even) {
 			</label> <br /> 
 			<label> Postal Code: <input type="number"
 				name="patientpostalcode" ng-model="doctorpostalcode" required
-				min="10000" max="999999">
+				min="100" max="99999">
 			</label> <br /> 
 			City: <select ng-model="patientcity"
 				ng-options="x.cityName for x in citynames">
@@ -78,7 +78,7 @@ table tr:nth-child(even) {
 			<!-- ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
 			<div ng-show="isGuardian">
 				<label>Guardian Last Name: <input type="text" name="guardianlastname"
-					ng-model="guardianLastName" required>
+					ng-model="guardianlastname" required>
 				</label> <br /> 
 				<label> First Name: <input type="text"
 					name="guardianfirstname" ng-model="guardianfirstname" required>
@@ -87,7 +87,7 @@ table tr:nth-child(even) {
 					name="guardianstreetname" ng-model="guardianstreetname" required>
 				</label> <br /> 
 				<label> Area Address: <input type="text"
-					name="guardianpostalcode" ng-model="guardianpostalcode" required>
+					name="guardianpostalcode" ng-model="guardianareaname" required>
 				</label> <br /> 
 				<label> Postal Code: <input type="number"
 					name="patientpostalcode" ng-model="doctorpostalcode" required
@@ -108,7 +108,7 @@ table tr:nth-child(even) {
 			
 		</form>
 		<br/>
-		<button ng-click="doctorRegistration()" type="submit">Register</button>
+		<button ng-click="patientRegistration()" type="submit">Register</button>
 	</div>
 	<script>
 		var app = angular.module('myApp', []);
@@ -135,79 +135,71 @@ table tr:nth-child(even) {
 				$scope.heading += response.statusText;
 			});
 			
-			$scope.doctorRegistration = function() {
+			$scope.patientRegistration = function() {
 				
-				var registrationForm = {
-						doctorLastName:$scope.lastname, 
-						doctorFirstName:$scope.firstname,
-						doctorSteetAddress:$scope.doctorsteetaddress,
-						doctorAreaAddress:$scope.doctorareaaddress,
-						doctorPostalCode:$scope.doctorpostalcode,
-						doctorCity:$scope.doctorcity.cityId,
-						doctorEmail:$scope.doctoremail,
-						doctorContact:$scope.doctorcontact,
-						doctorPassword:$scope.doctorpassword,
-						doctorFees:$scope.doctorfees, 
-						doctorType:$scope.doctorType.doctorTypeId,
-						doctorExperience:$scope.doctorexperience,
-						doctorSunday:($scope.sundaySlot0 ? true : false),
-						doctorMonday:($scope.mondaySlot0 ? true : false),
-						doctorTuesday:($scope.tuesdaySlot0 ? true : false),
-						doctorWednesday:($scope.wednesdaySlot0 ? true : false),
-						doctorThursday:($scope.thursdaySlot0 ? true : false),
-						doctorFriday:($scope.fridaySlot0 ? true : false),
-						doctorSaturday:($scope.saturdaySlot0 ? true : false)
-					};
+				if($scope.isGuardian) {
+					var guardianRegistrationForm = {
+							  guardianAreaName: $scope.guardianareaname,
+							  guardianCity: $scope.guardiancity.cityId,
+							  guardianContact: $scope.guardiancontact,
+							  guardianEmail: $scope.guardianemail,
+							  guardianFirstName: $scope.guardianfirstname,
+							  guardianLastName: $scope.guardianlastname,
+							  guardianPostalCode: $scope.doctorpostalcode,
+							  guardianStreetName: $scope.guardianstreetname
+							};
+					
+					var guardianreq = {
+							 method: 'POST',
+							 url: 'http://localhost:8888/app/cityvault/guardianuserregistration',
+							 data:  JSON.stringify(guardianRegistrationForm)
+							};
+					
+					$http(guardianreq)
+					.then(function(response) {
+								$scope.guardianId = response.data.guardianId;
+								registerPatient();
+								window.location = "http://localhost:8888/app/appointmentbookingapp/patientashboard";
+							},
+							function myError(response) {
+								alert("bekar");
+								$scope.heading += response.statusText;
+							});
+				} else {
+					registerPatient();
+				}
 				
-				var userreq = {
-						 method: 'POST',
-						 url: 'http://localhost:8888/app/cityvault/doctoruserregistration',
-						 data:  JSON.stringify(registrationForm)
-						}
-				$http(userreq)
-				.then(function(response) {
-							
-					/* var availabilityForm = [{
-						appointmentAvailabilityDoctor:1, 
-						appointmentAvailabilitySlotDay:'Sunday',
-						appointmentAvailabilityDoctorType:1,
-						appointmentAvailabilityDoctorCity:1,
-						appointmentAvailabilitySlotTime1:true,
-						appointmentAvailabilitySlotTime2:true,
-						appointmentAvailabilitySlotTime3:true,
-						appointmentAvailabilitySlotTime4:true,
-						appointmentAvailabilitySlotTime5:true,
-						appointmentAvailabilitySlotTime6:true,
-						appointmentAvailabilitySlotTime7:true,
-						appointmentAvailabilitySlotTime8:true,
-						appointmentAvailabilitySlotTime9:true,
-						appointmentAvailabilitySlotTime9:true,
-						appointmentAvailabilitySlotTime10:true,
-						appointmentAvailabilitySlotTime11:true,
-						}];
-							
-							var availreq = {
-									 method: 'POST',
-									 url: 'http://localhost:8888/app/cityvault/doctoruserregistration/availability',
-									 data:  JSON.stringify(availabilityForm)
-									}
-							$http(availreq)
-							.then(function(response) {
-										alert("Registration Successful");
-										
-										
-									},
-									function myError(response) {
-										alert("bekar");
-										$scope.heading += response.statusText;
-									}); */
-									
-							window.location = "http://localhost:8888/app/appointmentbookingapp/doctordashboard";
-						},
-						function myError(response) {
-							alert("bekar");
-							$scope.heading += response.statusText;
-						});
+				function registerPatient() {
+					var patientregistrationForm = {
+							  patientAreaName: $scope.patientareaname,
+							  patientCity: $scope.patientcity.cityId,
+							  patientContact: $scope.patientContact,
+							  patientEmail: $scope.patientemail,
+							  patientFirstName: $scope.patientfirstname,
+							  patientGender: $scope.patientgender,
+							  patientGuardian: $scope.guardianId,
+							  patientLastName: $scope.patientlastname,
+							  patientPassword: $scope.patientpassword,
+							  patientPostalCode: $scope.doctorpostalcode,
+							  patientStreetName: $scope.patientstreetname
+							};
+					
+					var userreq = {
+							 method: 'POST',
+							 url: 'http://localhost:8888/app/cityvault/patientuserregistration',
+							 data:  JSON.stringify(patientregistrationForm)
+							};
+					
+					$http(userreq)
+					.then(function(response) {
+						location.replace("http://localhost:8888/app/");
+							},
+							function myError(response) {
+								alert("Could not Login");
+								$scope.heading += response.statusText;
+							});
+				}
+				
 			};
 			
 		});

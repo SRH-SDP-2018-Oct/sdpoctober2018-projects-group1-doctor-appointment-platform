@@ -45,7 +45,7 @@ public class DoctorUserDAO implements DoctorUserIDAO {
 
 	@Override
 	public List<DoctorUser> getAvailableDoctors(Integer selectedCity, Integer selectedDoctorType, Integer selectedSlot,
-			Date selectedDate) {
+			Date selectedDate, Integer patientUserId) {
 		
 		Calendar c = Calendar.getInstance();
 		//selectedDate = c.getTime();
@@ -57,7 +57,7 @@ public class DoctorUserDAO implements DoctorUserIDAO {
 				apptAvailabilityRepository.findByParameters(selectedDayString, selectedDoctorType, selectedCity));
 		System.out.println("apptAvailByDay" + apptAvailabilityRepository.findByParameters(selectedDayString, selectedDoctorType, selectedCity));
 		List<AppointmentBooking> apptBookedByTimeDayCityType = apptBookingRepository.getUnvailableAppointments(selectedDayString, selectedSlot,
-				selectedCity, selectedDoctorType);
+				selectedCity, selectedDoctorType, patientUserId, selectedDate);
 		System.out.println(selectedDayString + selectedSlot + selectedCity + selectedDoctorType +"apptBookedByTimeDayCityType" + apptBookedByTimeDayCityType);
 		return doctorUserRepository.findAllById(getAvailableDoctors(apptAvailByTimeDay, apptBookedByTimeDayCityType));
 	}
@@ -192,6 +192,10 @@ public class DoctorUserDAO implements DoctorUserIDAO {
 		}
 
 		return apptAvailabilityListBySlotTime;
+	}
+	
+	public DoctorUser findOne(Integer doctorId) {
+		return doctorUserRepository.getByDoctorUserId(doctorId);
 	}
 
 }

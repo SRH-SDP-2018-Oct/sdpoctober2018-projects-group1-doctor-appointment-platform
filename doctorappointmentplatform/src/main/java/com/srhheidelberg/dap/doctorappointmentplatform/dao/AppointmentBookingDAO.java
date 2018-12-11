@@ -1,7 +1,5 @@
 package com.srhheidelberg.dap.doctorappointmentplatform.dao;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,6 +24,7 @@ public class AppointmentBookingDAO implements AppointmentBookingIDAO {
 	
 	@Override
 	public AppointmentBooking getById(Integer id) {
+		System.out.println("Single Appt" + appointmentBookingRepository.getOne(id));
 		return appointmentBookingRepository.getOne(id);
 	}
 
@@ -35,7 +34,7 @@ public class AppointmentBookingDAO implements AppointmentBookingIDAO {
 	}
 
 	@Override
-	public List<AppointmentBooking> findDoctorUpcomingAppointments() {
+	public List<AppointmentBooking> findDoctorUpcomingAppointments(Integer doctorId) {
 
 		Integer docId = 1;
 		List<AppointmentBooking> appointmentBookingList = appointmentBookingRepository
@@ -43,12 +42,11 @@ public class AppointmentBookingDAO implements AppointmentBookingIDAO {
 		return getUpcomingApptBooking(appointmentBookingList);
 	}
 
-	@Override
-	public List<AppointmentBooking> findPatientUpcomingAppointments() {
+	public List<AppointmentBooking> findPatientUpcomingAppointments(Integer patientUserId) {
 
-		Integer patId = 1;
+		//Integer patId = 1;
 		List<AppointmentBooking> appointmentBookingList = appointmentBookingRepository
-				.findByAppointmentBookingPatient(patId);
+				.findByAppointmentBookingPatient(patientUserId);
 		return getUpcomingApptBooking(appointmentBookingList);
 	}
 
@@ -58,12 +56,8 @@ public class AppointmentBookingDAO implements AppointmentBookingIDAO {
 		Date currentDate = cal.getTime();
 		for (AppointmentBooking appointmentBooking : appointmentBookingList) {
 			Date appointmentDate = null;
-			try {
-				appointmentDate = new SimpleDateFormat("yyyy-MM-dd")
-						.parse(appointmentBooking.getAppointmentBookingSlotDate());
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+				appointmentDate = appointmentBooking.getAppointmentBookingSlotDate();
+			
 			if (appointmentDate.after(currentDate)) {
 				bookedUpcomingAppointments.add(appointmentBooking);
 			}
@@ -71,8 +65,7 @@ public class AppointmentBookingDAO implements AppointmentBookingIDAO {
 		return bookedUpcomingAppointments;
 	}
 
-	@Override
-	public List<AppointmentBooking> findDoctorPreviousAppointments() {
+	public List<AppointmentBooking> findDoctorPreviousAppointments(Integer doctorId) {
 
 		Integer docId = 1;
 		List<AppointmentBooking> appointmentBookingList = appointmentBookingRepository
@@ -80,12 +73,11 @@ public class AppointmentBookingDAO implements AppointmentBookingIDAO {
 		return getPreviousApptBooking(appointmentBookingList);
 	}
 
-	@Override
-	public List<AppointmentBooking> findPatientPreviousAppointments() {
+	public List<AppointmentBooking> findPatientPreviousAppointments(Integer patientUserId) {
 
-		Integer patId = 1;
+		//Integer patId = 1;
 		List<AppointmentBooking> appointmentBookingList = appointmentBookingRepository
-				.findByAppointmentBookingPatient(patId);
+				.findByAppointmentBookingPatient(patientUserId);
 		return getPreviousApptBooking(appointmentBookingList);
 	}
 	
@@ -95,12 +87,7 @@ public class AppointmentBookingDAO implements AppointmentBookingIDAO {
 		Date currentDate = cal.getTime();
 		for (AppointmentBooking appointmentBooking : appointmentBookingList) {
 			Date appointmentDate = null;
-			try {
-				appointmentDate = new SimpleDateFormat("yyyy-MM-dd")
-						.parse(appointmentBooking.getAppointmentBookingSlotDate());
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+				appointmentDate = appointmentBooking.getAppointmentBookingSlotDate();
 			if (appointmentDate.before(currentDate)) {
 				bookedPreviousAppointments.add(appointmentBooking);
 			}
@@ -109,19 +96,22 @@ public class AppointmentBookingDAO implements AppointmentBookingIDAO {
 	}
 
 	@Override
-	public List<AppointmentBooking> findDoctorAppointmentStatusRemainings() {
+	public List<AppointmentBooking> findDoctorAppointmentStatusRemainings(Integer doctorId) {
 		Integer patId = 1;//Doctored
 		List<AppointmentBooking> appointmentBookingList = appointmentBookingRepository
-				.findByAppointmentBookingDoctor(patId);
-		return getAppointmentByStatus(getPreviousApptBooking(appointmentBookingList), "Doctored");
+				.findByAppointmentBookingDoctor(doctorId);
+		System.out.println("Booked1" + appointmentBookingList);
+		System.out.println("Booked2" + getPreviousApptBooking(appointmentBookingList));
+		return getAppointmentByStatus(getPreviousApptBooking(appointmentBookingList), "Booked");
 	}
 
 	@Override
-	public List<AppointmentBooking> findPatientFeedbackRemainAppointments() {
+	public List<AppointmentBooking> findPatientFeedbackRemainAppointments(Integer patientUserId) {
 
 		Integer patId = 1;//Treated
 		List<AppointmentBooking> appointmentBookingList = appointmentBookingRepository
-				.findByAppointmentBookingPatient(patId);
+				.findByAppointmentBookingPatient(patientUserId);
+		System.out.println("Treated " +getAppointmentByStatus(getPreviousApptBooking(appointmentBookingList), "Treated"));
 		return getAppointmentByStatus(getPreviousApptBooking(appointmentBookingList), "Treated");
 	}
 
@@ -137,5 +127,25 @@ public class AppointmentBookingDAO implements AppointmentBookingIDAO {
 		return statuswiseAppointments;
 	}
 	
+	public AppointmentBooking updateAppointmentFeedback(AppointmentBooking appointmentBooking) {
+		
+		AppointmentBooking ab = appointmentBookingRepository.getOne(appointmentBooking.getAppointmentBookingId());
+		ab.setAppointmentBookingRating(appointmentBooking.getAppointmentBookingRating());
+		ab.setAppointmentBookingFeedback(appointmentBooking.getAppointmentBookingFeedback());
+		ab.setAppointmentBookingStatus("Completed");
+		System.out.println("Appt Bok9ing feedcak" + ab);
+		return appointmentBookingRepository.save(ab);
+	}
 	
+	public AppointmentBooking updateAppointmentTreatment(AppointmentBooking appointmentBooking) {
+		
+		AppointmentBooking ab = appointmentBookingRepository.getOne(appointmentBooking.getAppointmentBookingId());
+		ab.setAppointmentBookingTreatment(appointmentBooking.getAppointmentBookingTreatment());
+		ab.setAppointmentBookingPrescription(appointmentBooking.getAppointmentBookingPrescription());
+		ab.setAppointmentBookingStatus("Treated");
+		System.out.println("Appt Bok9ing Presc" + ab);
+		return appointmentBookingRepository.save(ab);
+	}
+
+
 }

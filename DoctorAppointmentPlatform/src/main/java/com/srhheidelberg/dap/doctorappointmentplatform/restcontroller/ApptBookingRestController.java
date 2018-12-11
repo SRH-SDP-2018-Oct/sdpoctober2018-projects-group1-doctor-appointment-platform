@@ -6,14 +6,15 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.srhheidelberg.dap.doctorappointmentplatform.dao.AppointmentBookingDAO;
 import com.srhheidelberg.dap.doctorappointmentplatform.model.AppointmentBooking;
-import com.srhheidelberg.dap.doctorappointmentplatform.model.CityVault;
 
 @RestController
 @RequestMapping("/cityvault")
@@ -22,34 +23,34 @@ public class ApptBookingRestController {
 	@Autowired
 	AppointmentBookingDAO appointmentBookingDAO;
 	
-	@GetMapping("/patientupcomingappointments")
-	public List<AppointmentBooking> getPatientUpcomingAppointments() {
-		return appointmentBookingDAO.findPatientUpcomingAppointments();
+	@GetMapping("/patientupcomingappointments/{patientUserId}")
+	public List<AppointmentBooking> getPatientUpcomingAppointments(@PathVariable(value="patientUserId") Integer patientUserId) {
+		return appointmentBookingDAO.findPatientUpcomingAppointments(patientUserId);
 	}
 	
-	@GetMapping("/doctorupcomingappointments")
-	public List<AppointmentBooking> getDoctorUpcomingAppointments() {
-		return appointmentBookingDAO.findDoctorUpcomingAppointments();
+	@GetMapping("/doctorupcomingappointments/{doctorId}")
+	public List<AppointmentBooking> getDoctorUpcomingAppointments(@PathVariable(value="doctorId") Integer doctorId) {
+		return appointmentBookingDAO.findDoctorUpcomingAppointments(doctorId);
 	}
 	
-	@GetMapping("/patientpreviousappointments")
-	public List<AppointmentBooking> getPatientPreviousAppointments() {
-		return appointmentBookingDAO.findPatientPreviousAppointments();
+	@GetMapping("/patientpreviousappointments/{patientUserId}")
+	public List<AppointmentBooking> getPatientPreviousAppointments(@PathVariable(value="patientUserId") Integer patientUserId) {
+		return appointmentBookingDAO.findPatientPreviousAppointments(patientUserId);
 	}
 	
-	@GetMapping("/doctorpreviousappointments")
-	public List<AppointmentBooking> getDoctorPreviousAppointments() {
-		return appointmentBookingDAO.findDoctorPreviousAppointments();
+	@GetMapping("/doctorpreviousappointments/{doctorId}")
+	public List<AppointmentBooking> getDoctorPreviousAppointments(@PathVariable(value="doctorId") Integer doctorId) {
+		return appointmentBookingDAO.findDoctorPreviousAppointments(doctorId);
 	}
 	
-	@GetMapping("/patientfeebackremaingappointments")
-	public List<AppointmentBooking> getPatientFeedbackRemainingAppointments() {
-		return appointmentBookingDAO.findPatientFeedbackRemainAppointments();
+	@GetMapping("/patientfeebackremaingappointments/{patientUserId}")
+	public List<AppointmentBooking> getPatientFeedbackRemainingAppointments(@PathVariable(value="patientUserId") Integer patientUserId) {
+		return appointmentBookingDAO.findPatientFeedbackRemainAppointments(patientUserId);
 	}
 	
-	@GetMapping("/doctorstatusremainingappointments")
-	public List<AppointmentBooking> getDoctorStatusRemainingAppointments() {
-		return appointmentBookingDAO.findDoctorAppointmentStatusRemainings();
+	@GetMapping("/doctorstatusremainingappointments/{doctorId}")
+	public List<AppointmentBooking> getDoctorStatusRemainingAppointments(@PathVariable(value="doctorId") Integer doctorId) {
+		return appointmentBookingDAO.findDoctorAppointmentStatusRemainings(doctorId);
 	}
 	
 	@PostMapping("/bookpatientappointment")
@@ -57,5 +58,22 @@ public class ApptBookingRestController {
 		System.out.println("Booking: " + appointmentBooking);
 		return appointmentBookingDAO.save(appointmentBooking);
 	}
+	
+	@PutMapping("/patientfeedbackappointment")
+	public AppointmentBooking feedbackAppointmentBooking(@Valid @RequestBody AppointmentBooking appointmentBooking) {
+		System.out.println("Feeedback: " + appointmentBooking);
+		return appointmentBookingDAO.updateAppointmentFeedback(appointmentBooking);
+	}
+	
+	@PutMapping("/doctortreatedappointment")
+	public AppointmentBooking treatedAppointmentBooking(@Valid @RequestBody AppointmentBooking appointmentBooking) {
+		System.out.println("Treated: " + appointmentBooking);
+		return appointmentBookingDAO.updateAppointmentTreatment(appointmentBooking);
+	}
 
+	@GetMapping("/appointmentbooking/{appointmentbookingid}")
+	public AppointmentBooking findOne(@PathVariable(value="appointmentbookingid") Integer appointmentBookingId) {
+		System.out.println(appointmentBookingId + " Here " + appointmentBookingDAO.getById(appointmentBookingId));
+		return appointmentBookingDAO.getById(appointmentBookingId);
+	}
 }

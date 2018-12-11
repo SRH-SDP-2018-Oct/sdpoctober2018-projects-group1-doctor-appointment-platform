@@ -10,12 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * @author kaust
  *
  */
 @Entity
 @Table(name="cityvault")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class CityVault {
 	
 	@Id

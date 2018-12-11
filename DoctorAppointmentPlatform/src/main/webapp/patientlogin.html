@@ -3,29 +3,6 @@
 <head>
 <meta charset="ISO-8859-1" />
 </head>
-<style>
-div.solid {
-	border-style: solid;
-	background-color: #abcdef;
-	width: 20%;
-	height: 30%;
-	overflow: scroll;
-}
-
-table, th, td {
-	border: 1px solid grey;
-	border-collapse: collapse;
-	padding: 5px;
-}
-
-table tr:nth-child(odd) {
-	background-color: #f1f1f1;
-}
-
-table tr:nth-child(even) {
-	background-color: #ffffff;
-}
-</style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <body>
@@ -45,11 +22,58 @@ table tr:nth-child(even) {
 	<script>
 		var app = angular.module('myApp', []);
 		app.controller('formCtrl', function($scope, $location, $http) {
+			
+			//Cookie Setup
+			var expDays = 30;
+			var exp = new Date();
+			exp.setTime(exp.getTime() + (expDays*24*60*60*1000));
+			function GetCookie(name) {
+				var arg = name + "=";
+				var alen = arg.length;
+				var clen = document.cookie.length;
+				var i = 0;
+				while (i < clen) {
+					var j = i + alen;
+					if (document.cookie.substring(i, j) == arg)
+						return getCookieVal(j);
+					i = document.cookie.indexOf(" ", i) + 1;
+					if (i == 0)
+						break;
+				}
+				return null;
+			}
+			function SetCookie(name, value) {
+				var argv = SetCookie.arguments;
+				var argc = SetCookie.arguments.length;
+				var expires = (argc > 2) ? argv[2] : null;
+				var path = (argc > 3) ? argv[3] : null;
+				var domain = (argc > 4) ? argv[4] : null;
+				var secure = (argc > 5) ? argv[5] : false;
+				document.cookie = name
+						+ "="
+						+ escape(value)
+						+ ((expires == null) ? ""
+								: ("; expires=" + expires
+										.toGMTString()))
+						+ ((path == null) ? ""
+								: ("; path=" + path))
+						+ ((domain == null) ? ""
+								: ("; domain=" + domain))
+						+ ((secure == true) ? "; secure" : "");
+			}
+			function DeleteCookie(name) {
+				var exp = new Date();
+				exp.setTime(exp.getTime() - 1);
+				var cval = GetCookie(name);
+				document.cookie = name + "=" + cval
+						+ "; expires=" + exp.toGMTString();
+			}
 
 			$scope.doctorSignup = function() {
 				window.location = "http://localhost:8888/app/appointmentbookingapp/patientregistration";
 			};
 			
+			//login
 			$scope.patientLogin = function() {
 				
 				if($scope.username == null | $scope.password == null){
@@ -63,7 +87,8 @@ table tr:nth-child(even) {
 							$scope.patientuser = response.data.patientPassword;
 							
 							if($scope.password == response.data.patientPassword) {
-								document.cookie = "patientId=" + response.data.patientId;
+								SetCookie("patientId", response.data.patientId);
+								alert("logged In!!!");
 								window.location = "http://localhost:8888/app/appointmentbookingapp/patientdashboard";
 							}
 							else {

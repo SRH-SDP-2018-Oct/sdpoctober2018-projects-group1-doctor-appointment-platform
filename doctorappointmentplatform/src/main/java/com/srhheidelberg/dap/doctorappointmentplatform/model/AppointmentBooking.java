@@ -1,5 +1,7 @@
 package com.srhheidelberg.dap.doctorappointmentplatform.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,8 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="appointmentbooking")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class AppointmentBooking {
 	
 	@Id
@@ -17,7 +22,7 @@ public class AppointmentBooking {
 	private Integer appointmentBookingId;
 	
 	@Column(name="appointmentbookingslotdate")
-	private String appointmentBookingSlotDate;
+	private Date appointmentBookingSlotDate;
 	
 	@Column(name="appointmentbookingslotday")
 	private String appointmentBookingSlotDay;
@@ -89,11 +94,11 @@ public class AppointmentBooking {
 		this.appointmentBookingId = appointmentBookingId;
 	}
 
-	public String getAppointmentBookingSlotDate() {
+	public Date getAppointmentBookingSlotDate() {
 		return appointmentBookingSlotDate;
 	}
 
-	public void setAppointmentBookingSlotDate(String appointmentBookingSlotDate) {
+	public void setAppointmentBookingSlotDate(Date appointmentBookingSlotDate) {
 		this.appointmentBookingSlotDate = appointmentBookingSlotDate;
 	}
 
@@ -168,5 +173,5 @@ public class AppointmentBooking {
 	public void setAppointmentBookingStatus(String appointmentBookingStatus) {
 		this.appointmentBookingStatus = appointmentBookingStatus;
 	}
-
+	
 }

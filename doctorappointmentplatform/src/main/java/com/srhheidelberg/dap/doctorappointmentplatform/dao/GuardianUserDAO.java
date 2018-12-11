@@ -14,8 +14,8 @@ public class GuardianUserDAO implements GuardianUserIDAO {
 	GuardianUserRepository guardianUserRepository;
 	
 	@Override
-	public void save(GuardianUser guardianUser) {
-		guardianUserRepository.save(guardianUser);
+	public GuardianUser save(GuardianUser guardianUser) {
+		return guardianUserRepository.save(guardianUser);
 	}
 	
 	@Override

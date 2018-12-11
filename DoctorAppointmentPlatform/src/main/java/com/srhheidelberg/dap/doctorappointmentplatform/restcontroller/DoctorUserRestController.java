@@ -25,16 +25,18 @@ public class DoctorUserRestController {
 	@Autowired
 	DoctorUserDAO doctorUserDAO;
 	
-	@GetMapping("/availabledoctors/{selectedCity}/{selectedDoctorType}/{selectedSlot}/{selectedDate}")
+	@GetMapping("/availabledoctors/{selectedCity}/{selectedDoctorType}/{selectedSlot}/{patientUserId}/{selectedDate}")
 	public List<DoctorUser> getAvailableDoctors(ModelMap modelMap, 
 			@PathVariable Integer selectedCity, 
 			@PathVariable Integer selectedDoctorType, 
 			@PathVariable Integer selectedSlot,
+			@PathVariable Integer patientUserId,
 			@PathVariable Date selectedDate) {
 		
 		Calendar cal = Calendar.getInstance();
 		Date todaysDate = cal.getTime();//
-		return doctorUserDAO.getAvailableDoctors(selectedCity, selectedDoctorType, selectedSlot, selectedDate);
+		//System.out.print(selectedDate);
+		return doctorUserDAO.getAvailableDoctors(selectedCity, selectedDoctorType, selectedSlot, selectedDate, patientUserId);
 	}
 	
 	@GetMapping("/doctoruserlogin/{doctorEmail}")
@@ -47,6 +49,16 @@ public class DoctorUserRestController {
 	public DoctorUser createDoctorUser(@Valid @RequestBody DoctorUser doctorUser) {
 		System.out.println("Doctor User Create: " + doctorUser);
 		return doctorUserDAO.save(doctorUser);
+	}
+	
+	@GetMapping("/doctorusers")
+	public List<DoctorUser> getAll() {
+		return doctorUserDAO.findAll();
+	}
+	
+	@GetMapping("/doctorusers/{doctorid}")
+	public DoctorUser findOne(@PathVariable(value="doctorid") Integer doctorId) {
+		return doctorUserDAO.findOne(doctorId);
 	}
 
 }

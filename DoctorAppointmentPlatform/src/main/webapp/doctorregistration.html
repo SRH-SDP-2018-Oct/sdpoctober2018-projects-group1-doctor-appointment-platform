@@ -3,29 +3,9 @@
 <head>
 <meta charset="ISO-8859-1" />
 </head>
-<style>
-div.solid {
-	border-style: solid;
-	background-color: #abcdef;
-	width: 20%;
-	height: 30%;
-	overflow: scroll;
-}
-
-table, th, td {
-	border: 1px solid grey;
-	border-collapse: collapse;
-	padding: 5px;
-}
-
-table tr:nth-child(odd) {
-	background-color: #f1f1f1;
-}
-
-table tr:nth-child(even) {
-	background-color: #ffffff;
-}
-</style>
+<link rel = "stylesheet"
+   type = "text/css"
+   href = "/app/main.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <body>
@@ -72,7 +52,7 @@ table tr:nth-child(even) {
 			</label> <br />
 			<br/>
 			<p>Availability</p>
-			<table>
+			<table class='patient-table'>
 				<th>Day</th>
 				<th>Slot1</th>
 				<th>Slot2</th>
@@ -92,18 +72,18 @@ table tr:nth-child(even) {
 								ng-model="sundaySlot0">sunday: 
 					</label>
 					</td>
-					<td><input type="checkbox"ng-model="sundaySlot1"></td>
-					<td><input type="checkbox"ng-model="sundaySlot2"></td>
-					<td><input type="checkbox"ng-model="sundaySlot3"></td>
-					<td><input type="checkbox"ng-model="sundaySlot4"></td>
-					<td><input type="checkbox"ng-model="sundaySlot5"></td>
-					<td><input type="checkbox"ng-model="sundaySlot6"></td>
-					<td><input type="checkbox"ng-model="sundaySlot7"></td>
-					<td><input type="checkbox"ng-model="sundaySlot8"></td>
-					<td><input type="checkbox"ng-model="sundaySlot9"></td>
-					<td><input type="checkbox"ng-model="sundaySlot10"></td>
-					<td><input type="checkbox"ng-model="sundaySlot11"></td>
-					<td><input type="checkbox"ng-model="sundaySlot12"></td>
+					<td><input type="checkbox"ng-model="sundaySlot1" ng-show="sundaySlot0"></td>
+					<td><input type="checkbox"ng-model="sundaySlot2" ng-show="sundaySlot0"></td>
+					<td><input type="checkbox"ng-model="sundaySlot3" ng-show="sundaySlot0"></td>
+					<td><input type="checkbox"ng-model="sundaySlot4" ng-show="sundaySlot0"></td>
+					<td><input type="checkbox"ng-model="sundaySlot5" ng-show="sundaySlot0"></td>
+					<td><input type="checkbox"ng-model="sundaySlot6" ng-show="sundaySlot0"></td>
+					<td><input type="checkbox"ng-model="sundaySlot7" ng-show="sundaySlot0"></td>
+					<td><input type="checkbox"ng-model="sundaySlot8" ng-show="sundaySlot0"></td>
+					<td><input type="checkbox"ng-model="sundaySlot9" ng-show="sundaySlot0"></td>
+					<td><input type="checkbox"ng-model="sundaySlot10" ng-show="sundaySlot0"></td>
+					<td><input type="checkbox"ng-model="sundaySlot11" ng-show="sundaySlot0"></td>
+					<td><input type="checkbox"ng-model="sundaySlot12" ng-show="sundaySlot0"></td>
 					
 				</tr>
 				<tr ><td>
@@ -111,108 +91,108 @@ table tr:nth-child(even) {
 								ng-model="mondaySlot0">monday: 
 					</label>
 				</td>
-				<td><input type="checkbox"ng-model="mondaySlot0"></td>
-					<td><input type="checkbox"ng-model="mondaySlot2"></td>
-					<td><input type="checkbox"ng-model="mondaySlot3"></td>
-					<td><input type="checkbox"ng-model="mondaySlot4"></td>
-					<td><input type="checkbox"ng-model="mondaySlot5"></td>
-					<td><input type="checkbox"ng-model="mondaySlot6"></td>
-					<td><input type="checkbox"ng-model="mondaySlot7"></td>
-					<td><input type="checkbox"ng-model="mondaySlot8"></td>
-					<td><input type="checkbox"ng-model="mondaySlot9"></td>
-					<td><input type="checkbox"ng-model="mondaySlot10"></td>
-					<td><input type="checkbox"ng-model="mondaySlot11"></td>
-					<td><input type="checkbox"ng-model="mondaySlot12"></td>
+					<td><input type="checkbox"ng-model="mondaySlot1" ng-show="mondaySlot0"></td>
+					<td><input type="checkbox"ng-model="mondaySlot2" ng-show="mondaySlot0"></td>
+					<td><input type="checkbox"ng-model="mondaySlot3" ng-show="mondaySlot0"></td>
+					<td><input type="checkbox"ng-model="mondaySlot4" ng-show="mondaySlot0"></td>
+					<td><input type="checkbox"ng-model="mondaySlot5" ng-show="mondaySlot0"></td>
+					<td><input type="checkbox"ng-model="mondaySlot6" ng-show="mondaySlot0"></td>
+					<td><input type="checkbox"ng-model="mondaySlot7" ng-show="mondaySlot0"></td>
+					<td><input type="checkbox"ng-model="mondaySlot8" ng-show="mondaySlot0"></td>
+					<td><input type="checkbox"ng-model="mondaySlot9" ng-show="mondaySlot0"></td>
+					<td><input type="checkbox"ng-model="mondaySlot10" ng-show="mondaySlot0"></td>
+					<td><input type="checkbox"ng-model="mondaySlot11" ng-show="mondaySlot0"></td>
+					<td><input type="checkbox"ng-model="mondaySlot12" ng-show="mondaySlot0"></td>
 				</tr>
 				<tr ><td>
 					<label><input type="checkbox" ng-init="checked=false"
 								ng-model="tuesdaySlot0">tuesday: 
 					</label>
 				</td>
-				<td><input type="checkbox"ng-model="tuesdaySlot1"></td>
-					<td><input type="checkbox"ng-model="tuesdaySlot2"></td>
-					<td><input type="checkbox"ng-model="tuesdaySlot3"></td>
-					<td><input type="checkbox"ng-model="tuesdaySlot4"></td>
-					<td><input type="checkbox"ng-model="tuesdaySlot5"></td>
-					<td><input type="checkbox"ng-model="tuesdaySlot6"></td>
-					<td><input type="checkbox"ng-model="tuesdaySlot7"></td>
-					<td><input type="checkbox"ng-model="tuesdaySlot8"></td>
-					<td><input type="checkbox"ng-model="tuesdaySlot9"></td>
-					<td><input type="checkbox"ng-model="tuesdaySlot10"></td>
-					<td><input type="checkbox"ng-model="tuesdaySlot11"></td>
-					<td><input type="checkbox"ng-model="tuesdaySlot12"></td>
+					<td><input type="checkbox"ng-model="tuesdaySlot1" ng-show="tuesdaySlot0"></td>
+					<td><input type="checkbox"ng-model="tuesdaySlot2" ng-show="tuesdaySlot0"></td>
+					<td><input type="checkbox"ng-model="tuesdaySlot3" ng-show="tuesdaySlot0"></td>
+					<td><input type="checkbox"ng-model="tuesdaySlot4" ng-show="tuesdaySlot0"></td>
+					<td><input type="checkbox"ng-model="tuesdaySlot5" ng-show="tuesdaySlot0"></td>
+					<td><input type="checkbox"ng-model="tuesdaySlot6" ng-show="tuesdaySlot0"></td>
+					<td><input type="checkbox"ng-model="tuesdaySlot7" ng-show="tuesdaySlot0"></td>
+					<td><input type="checkbox"ng-model="tuesdaySlot8" ng-show="tuesdaySlot0"></td>
+					<td><input type="checkbox"ng-model="tuesdaySlot9" ng-show="tuesdaySlot0"></td>
+					<td><input type="checkbox"ng-model="tuesdaySlot10" ng-show="tuesdaySlot0"></td>
+					<td><input type="checkbox"ng-model="tuesdaySlot11" ng-show="tuesdaySlot0"></td>
+					<td><input type="checkbox"ng-model="tuesdaySlot12" ng-show="tuesdaySlot0"></td>
 				</tr>
 				<tr ><td>
 					<label><input type="checkbox" ng-init="checked=false"
 								ng-model="wednesdaySlot0">wednesday: 
 					</label>
 				</td>
-				<td><input type="checkbox"ng-model="wednesdaySlot1"></td>
-					<td><input type="checkbox"ng-model="wednesdaySlot2"></td>
-					<td><input type="checkbox"ng-model="wednesdaySlot3"></td>
-					<td><input type="checkbox"ng-model="wednesdaySlot4"></td>
-					<td><input type="checkbox"ng-model="wednesdaySlot5"></td>
-					<td><input type="checkbox"ng-model="wednesdaySlot6"></td>
-					<td><input type="checkbox"ng-model="wednesdaySlot7"></td>
-					<td><input type="checkbox"ng-model="wednesdaySlot8"></td>
-					<td><input type="checkbox"ng-model="wednesdaySlot9"></td>
-					<td><input type="checkbox"ng-model="wednesdaySlot10"></td>
-					<td><input type="checkbox"ng-model="wednesdaySlot11"></td>
-					<td><input type="checkbox"ng-model="wednesdaySlot12"></td>
+				<td><input type="checkbox"ng-model="wednesdaySlot1" ng-show="wednesdaySlot0"></td>
+					<td><input type="checkbox"ng-model="wednesdaySlot2" ng-show="wednesdaySlot0"></td>
+					<td><input type="checkbox"ng-model="wednesdaySlot3" ng-show="wednesdaySlot0"></td>
+					<td><input type="checkbox"ng-model="wednesdaySlot4" ng-show="wednesdaySlot0"></td>
+					<td><input type="checkbox"ng-model="wednesdaySlot5" ng-show="wednesdaySlot0"></td>
+					<td><input type="checkbox"ng-model="wednesdaySlot6" ng-show="wednesdaySlot0"></td>
+					<td><input type="checkbox"ng-model="wednesdaySlot7" ng-show="wednesdaySlot0"></td>
+					<td><input type="checkbox"ng-model="wednesdaySlot8" ng-show="wednesdaySlot0"></td>
+					<td><input type="checkbox"ng-model="wednesdaySlot9" ng-show="wednesdaySlot0"></td>
+					<td><input type="checkbox"ng-model="wednesdaySlot10" ng-show="wednesdaySlot0"></td>
+					<td><input type="checkbox"ng-model="wednesdaySlot11" ng-show="wednesdaySlot0"></td>
+					<td><input type="checkbox"ng-model="wednesdaySlot12" ng-show="wednesdaySlot0"></td>
 				</tr>
 				<tr ><td>
 					<label><input type="checkbox" ng-init="checked=false"
 								ng-model="thursdaySlot0">thursday: 
 					</label>
 				</td>
-				<td><input type="checkbox"ng-model="thursdaySlot1"></td>
-					<td><input type="checkbox"ng-model="thursdaySlot2"></td>
-					<td><input type="checkbox"ng-model="thursdaySlot3"></td>
-					<td><input type="checkbox"ng-model="thursdaySlot4"></td>
-					<td><input type="checkbox"ng-model="thursdaySlot5"></td>
-					<td><input type="checkbox"ng-model="thursdaySlot6"></td>
-					<td><input type="checkbox"ng-model="thursdaySlot7"></td>
-					<td><input type="checkbox"ng-model="thursdaySlot8"></td>
-					<td><input type="checkbox"ng-model="thursdaySlot9"></td>
-					<td><input type="checkbox"ng-model="thursdaySlot10"></td>
-					<td><input type="checkbox"ng-model="thursdaySlot11"></td>
-					<td><input type="checkbox"ng-model="thursdaySlot12"></td>
+				<td><input type="checkbox"ng-model="thursdaySlot1" ng-show="thursdaySlot0"></td>
+					<td><input type="checkbox"ng-model="thursdaySlot2" ng-show="thursdaySlot0"></td>
+					<td><input type="checkbox"ng-model="thursdaySlot3" ng-show="thursdaySlot0"></td>
+					<td><input type="checkbox"ng-model="thursdaySlot4" ng-show="thursdaySlot0"></td>
+					<td><input type="checkbox"ng-model="thursdaySlot5" ng-show="thursdaySlot0"></td>
+					<td><input type="checkbox"ng-model="thursdaySlot6" ng-show="thursdaySlot0"></td>
+					<td><input type="checkbox"ng-model="thursdaySlot7" ng-show="thursdaySlot0"></td>
+					<td><input type="checkbox"ng-model="thursdaySlot8" ng-show="thursdaySlot0"></td>
+					<td><input type="checkbox"ng-model="thursdaySlot9" ng-show="thursdaySlot0"></td>
+					<td><input type="checkbox"ng-model="thursdaySlot10" ng-show="thursdaySlot0"></td>
+					<td><input type="checkbox"ng-model="thursdaySlot11" ng-show="thursdaySlot0"></td>
+					<td><input type="checkbox"ng-model="thursdaySlot12" ng-show="thurdaySlot0"></td>
 				</tr>
 				<tr ><td>
 					<label><input type="checkbox" ng-init="checked=false"
 								ng-model="fridaySlot0">friday: 
 					</label>
 				</td>
-				<td><input type="checkbox"ng-model="fridaySlot1"></td>
-					<td><input type="checkbox"ng-model="fridaySlot2"></td>
-					<td><input type="checkbox"ng-model="fridaySlot3"></td>
-					<td><input type="checkbox"ng-model="fridaySlot4"></td>
-					<td><input type="checkbox"ng-model="fridaySlot5"></td>
-					<td><input type="checkbox"ng-model="fridaySlot6"></td>
-					<td><input type="checkbox"ng-model="fridaySlot7"></td>
-					<td><input type="checkbox"ng-model="fridaySlot8"></td>
-					<td><input type="checkbox"ng-model="fridaySlot9"></td>
-					<td><input type="checkbox"ng-model="fridaySlot10"></td>
-					<td><input type="checkbox"ng-model="fridaySlot11"></td>
-					<td><input type="checkbox"ng-model="fridaySlot12"></td>
+				<td><input type="checkbox"ng-model="fridaySlot1" ng-show="fridaySlot0"></td>
+					<td><input type="checkbox"ng-model="fridaySlot2" ng-show="fridaySlot0"></td>
+					<td><input type="checkbox"ng-model="fridaySlot3" ng-show="fridaySlot0"></td>
+					<td><input type="checkbox"ng-model="fridaySlot4" ng-show="fridaySlot0"></td>
+					<td><input type="checkbox"ng-model="fridaySlot5" ng-show="fridaySlot0"></td>
+					<td><input type="checkbox"ng-model="fridaySlot6" ng-show="fridaySlot0"></td>
+					<td><input type="checkbox"ng-model="fridaySlot7" ng-show="fridaySlot0"></td>
+					<td><input type="checkbox"ng-model="fridaySlot8" ng-show="fridaySlot0"></td>
+					<td><input type="checkbox"ng-model="fridaySlot9" ng-show="fridaySlot0"></td>
+					<td><input type="checkbox"ng-model="fridaySlot10" ng-show="fridaySlot0"></td>
+					<td><input type="checkbox"ng-model="fridaySlot11" ng-show="fridaySlot0"></td>
+					<td><input type="checkbox"ng-model="fridaySlot12" ng-show="fridaySlot0"></td>
 				</tr>
 				<tr ><td>
 					<label><input type="checkbox" ng-init="checked=false"
 								ng-model="saturdaySlot0">saturday: 
 					</label>
 				</td>
-				<td><input type="checkbox"ng-model="saturdaySlot1"></td>
-					<td><input type="checkbox"ng-model="saturdaySlot2"></td>
-					<td><input type="checkbox"ng-model="saturdaySlot3"></td>
-					<td><input type="checkbox"ng-model="saturdaySlot4"></td>
-					<td><input type="checkbox"ng-model="saturdaySlot5"></td>
-					<td><input type="checkbox"ng-model="saturdaySlot6"></td>
-					<td><input type="checkbox"ng-model="saturdaySlot7"></td>
-					<td><input type="checkbox"ng-model="saturdaySlot8"></td>
-					<td><input type="checkbox"ng-model="saturdaySlot9"></td>
-					<td><input type="checkbox"ng-model="saturdaySlot10"></td>
-					<td><input type="checkbox"ng-model="saturdaySlot11"></td>
-					<td><input type="checkbox"ng-model="saturdaySlot12"></td>
+				<td><input type="checkbox"ng-model="saturdaySlot1" ng-show="saturdaySlot0"></td>
+					<td><input type="checkbox"ng-model="saturdaySlot2" ng-show="saturdaySlot0"></td>
+					<td><input type="checkbox"ng-model="saturdaySlot3" ng-show="saturdaySlot0"></td>
+					<td><input type="checkbox"ng-model="saturdaySlot4" ng-show="saturdaySlot0"></td>
+					<td><input type="checkbox"ng-model="saturdaySlot5" ng-show="saturdaySlot0"></td>
+					<td><input type="checkbox"ng-model="saturdaySlot6" ng-show="saturdaySlot0"></td>
+					<td><input type="checkbox"ng-model="saturdaySlot7" ng-show="saturdaySlot0"></td>
+					<td><input type="checkbox"ng-model="saturdaySlot8" ng-show="saturdaySlot0"></td>
+					<td><input type="checkbox"ng-model="saturdaySlot9" ng-show="saturdaySlot0"></td>
+					<td><input type="checkbox"ng-model="saturdaySlot10" ng-show="saturdaySlot0"></td>
+					<td><input type="checkbox"ng-model="saturdaySlot11" ng-show="saturdaySlot0"></td>
+					<td><input type="checkbox"ng-model="saturdaySlot12" ng-show="saturdaySlot0"></td>
 				</tr>
 			</table>
 		</form>
@@ -275,46 +255,158 @@ table tr:nth-child(even) {
 						}
 				$http(userreq)
 				.then(function(response) {
+							$scope.createdDoctorId = response.data.doctorUserId;
+							//alert($scope.createdDoctorId);
+							var availabilityFormArray = Array();
 							
-					/* var availabilityForm = [{
-						appointmentAvailabilityDoctor:1, 
-						appointmentAvailabilitySlotDay:'Sunday',
-						appointmentAvailabilityDoctorType:1,
-						appointmentAvailabilityDoctorCity:1,
-						appointmentAvailabilitySlotTime1:true,
-						appointmentAvailabilitySlotTime2:true,
-						appointmentAvailabilitySlotTime3:true,
-						appointmentAvailabilitySlotTime4:true,
-						appointmentAvailabilitySlotTime5:true,
-						appointmentAvailabilitySlotTime6:true,
-						appointmentAvailabilitySlotTime7:true,
-						appointmentAvailabilitySlotTime8:true,
-						appointmentAvailabilitySlotTime9:true,
-						appointmentAvailabilitySlotTime9:true,
-						appointmentAvailabilitySlotTime10:true,
-						appointmentAvailabilitySlotTime11:true,
-						}];
 							
+					 		
+							availabilityFormArray[0] = {
+							    appointmentAvailabilityDoctor: $scope.createdDoctorId,
+							    appointmentAvailabilityDoctorCity: $scope.doctorcity.cityId,
+							    appointmentAvailabilityDoctorType: $scope.doctorType.doctorTypeId,
+							    appointmentAvailabilitySlotDay: "Sunday",
+							    appointmentAvailabilitySlotTime1: ($scope.sundaySlot1 ? true : false),
+							    appointmentAvailabilitySlotTime10: ($scope.sundaySlot10 ? true : false),
+							    appointmentAvailabilitySlotTime11: ($scope.sundaySlot11 ? true : false),
+							    appointmentAvailabilitySlotTime12: ($scope.sundaySlot12 ? true : false),
+							    appointmentAvailabilitySlotTime2: ($scope.sundaySlot2 ? true : false),
+							    appointmentAvailabilitySlotTime3: ($scope.sundaySlot3 ? true : false),
+							    appointmentAvailabilitySlotTime4: ($scope.sundaySlot4 ? true : false),
+							    appointmentAvailabilitySlotTime5: ($scope.sundaySlot5 ? true : false),
+							    appointmentAvailabilitySlotTime6: ($scope.sundaySlot6 ? true : false),
+							    appointmentAvailabilitySlotTime7: ($scope.sundaySlot7 ? true : false),
+							    appointmentAvailabilitySlotTime8: ($scope.sundaySlot8 ? true : false),
+							    appointmentAvailabilitySlotTime9: ($scope.sundaySlot9 ? true : false)
+							  };
+						  	availabilityFormArray[1] = {
+								    appointmentAvailabilityDoctor: $scope.createdDoctorId,
+								    appointmentAvailabilityDoctorCity: $scope.doctorcity.cityId,
+								    appointmentAvailabilityDoctorType: $scope.doctorType.doctorTypeId,
+								    appointmentAvailabilitySlotDay: "Monday",
+								    appointmentAvailabilitySlotTime1: ($scope.mondaySlot1 ? true : false),
+								    appointmentAvailabilitySlotTime10: ($scope.mondaySlot10 ? true : false),
+								    appointmentAvailabilitySlotTime11: ($scope.mondaySlot11 ? true : false),
+								    appointmentAvailabilitySlotTime12: ($scope.mondaySlot12 ? true : false),
+								    appointmentAvailabilitySlotTime2: ($scope.mondaySlot2 ? true : false),
+								    appointmentAvailabilitySlotTime3: ($scope.mondaySlot3 ? true : false),
+								    appointmentAvailabilitySlotTime4: ($scope.mondaySlot4 ? true : false),
+								    appointmentAvailabilitySlotTime5: ($scope.mondaySlot5 ? true : false),
+								    appointmentAvailabilitySlotTime6: ($scope.mondaySlot6 ? true : false),
+								    appointmentAvailabilitySlotTime7: ($scope.mondaySlot7 ? true : false),
+								    appointmentAvailabilitySlotTime8: ($scope.mondaySlot8 ? true : false),
+								    appointmentAvailabilitySlotTime9: ($scope.mondaySlot9 ? true : false)
+								};
+						  	availabilityFormArray[2] = {
+								    appointmentAvailabilityDoctor: $scope.createdDoctorId,
+								    appointmentAvailabilityDoctorCity: $scope.doctorcity.cityId,
+								    appointmentAvailabilityDoctorType: $scope.doctorType.doctorTypeId,
+								    appointmentAvailabilitySlotDay: "Tuesday",
+								    appointmentAvailabilitySlotTime1: ($scope.tuesdaySlot1 ? true : false),
+								    appointmentAvailabilitySlotTime10: ($scope.tuesdaySlot1 ? true : false),
+								    appointmentAvailabilitySlotTime11: ($scope.tuesdaySlot11 ? true : false),
+								    appointmentAvailabilitySlotTime12: ($scope.tuesdaySlot12 ? true : false),
+								    appointmentAvailabilitySlotTime2: ($scope.tuesdaySlot2 ? true : false),
+								    appointmentAvailabilitySlotTime3: ($scope.tuesdaySlot3 ? true : false),
+								    appointmentAvailabilitySlotTime4: ($scope.tuesdaySlot4 ? true : false),
+								    appointmentAvailabilitySlotTime5: ($scope.tuesdaySlot5 ? true : false),
+								    appointmentAvailabilitySlotTime6: ($scope.tuesdaySlot6 ? true : false),
+								    appointmentAvailabilitySlotTime7: ($scope.tuesdaySlot7 ? true : false),
+								    appointmentAvailabilitySlotTime8: ($scope.tuesdaySlot8 ? true : false),
+								    appointmentAvailabilitySlotTime9: ($scope.tuesdaySlot9 ? true : false)
+								  };
+							availabilityFormArray[3] = {
+									    appointmentAvailabilityDoctor: $scope.createdDoctorId,
+									    appointmentAvailabilityDoctorCity: $scope.doctorcity.cityId,
+									    appointmentAvailabilityDoctorType: $scope.doctorType.doctorTypeId,
+									    appointmentAvailabilitySlotDay: "Wednesday",
+									    appointmentAvailabilitySlotTime1: ($scope.wednesdaySlot1 ? true : false),
+									    appointmentAvailabilitySlotTime10: ($scope.wednesdaySlot10 ? true : false),
+									    appointmentAvailabilitySlotTime11: ($scope.wednesdaySlot11 ? true : false),
+									    appointmentAvailabilitySlotTime12: ($scope.wednesdaySlot12 ? true : false),
+									    appointmentAvailabilitySlotTime2: ($scope.wednesdaySlot2 ? true : false),
+									    appointmentAvailabilitySlotTime3: ($scope.wednesdaySlot3 ? true : false),
+									    appointmentAvailabilitySlotTime4: ($scope.wednesdaySlot4 ? true : false),
+									    appointmentAvailabilitySlotTime5: ($scope.wednesdaySlot5 ? true : false),
+									    appointmentAvailabilitySlotTime6: ($scope.wednesdaySlot6 ? true : false),
+									    appointmentAvailabilitySlotTime7: ($scope.wednesdaySlot7 ? true : false),
+									    appointmentAvailabilitySlotTime8: ($scope.wednesdaySlot8 ? true : false),
+									    appointmentAvailabilitySlotTime9: ($scope.wednesdaySlot9 ? true : false)
+									  };
+							availabilityFormArray[4] = {
+										    appointmentAvailabilityDoctor: $scope.createdDoctorId,
+										    appointmentAvailabilityDoctorCity: $scope.doctorcity.cityId,
+										    appointmentAvailabilityDoctorType: $scope.doctorType.doctorTypeId,
+										    appointmentAvailabilitySlotDay: "Thursday",
+										    appointmentAvailabilitySlotTime1: ($scope.thursdaySlot1 ? true : false),
+										    appointmentAvailabilitySlotTime10: ($scope.thursdaySlot10 ? true : false),
+										    appointmentAvailabilitySlotTime11: ($scope.thursdaySlot11 ? true : false),
+										    appointmentAvailabilitySlotTime12: ($scope.thursdaySlot12 ? true : false),
+										    appointmentAvailabilitySlotTime2: ($scope.thursdaySlot2 ? true : false),
+										    appointmentAvailabilitySlotTime3: ($scope.thursdaySlot3 ? true : false),
+										    appointmentAvailabilitySlotTime4: ($scope.thursdaySlot4 ? true : false),
+										    appointmentAvailabilitySlotTime5: ($scope.thursdaySlot5 ? true : false),
+										    appointmentAvailabilitySlotTime6: ($scope.thursdaySlot6 ? true : false),
+										    appointmentAvailabilitySlotTime7: ($scope.thursdaySlot7 ? true : false),
+										    appointmentAvailabilitySlotTime8: ($scope.thursdaySlot8 ? true : false),
+										    appointmentAvailabilitySlotTime9: ($scope.thursdaySlot9 ? true : false)
+										  };
+							availabilityFormArray[5] = {
+											    appointmentAvailabilityDoctor: $scope.createdDoctorId,
+											    appointmentAvailabilityDoctorCity: $scope.doctorcity.cityId,
+											    appointmentAvailabilityDoctorType: $scope.doctorType.doctorTypeId,
+											    appointmentAvailabilitySlotDay: "Friday",
+											    appointmentAvailabilitySlotTime1: ($scope.fridaySlot1 ? true : false),
+											    appointmentAvailabilitySlotTime10: ($scope.fridaySlot10 ? true : false),
+											    appointmentAvailabilitySlotTime11: ($scope.fridaySlot11 ? true : false),
+											    appointmentAvailabilitySlotTime12: ($scope.fridaySlot12 ? true : false),
+											    appointmentAvailabilitySlotTime2: ($scope.fridaySlot2 ? true : false),
+											    appointmentAvailabilitySlotTime3: ($scope.fridaySlot3 ? true : false),
+											    appointmentAvailabilitySlotTime4: ($scope.fridaySlot4 ? true : false),
+											    appointmentAvailabilitySlotTime5: ($scope.fridaySlot5 ? true : false),
+											    appointmentAvailabilitySlotTime6: ($scope.fridaySlot6 ? true : false),
+											    appointmentAvailabilitySlotTime7: ($scope.fridaySlot7 ? true : false),
+											    appointmentAvailabilitySlotTime8: ($scope.fridaySlot8 ? true : false),
+											    appointmentAvailabilitySlotTime9: ($scope.fridaySlot9 ? true : false)
+											  };
+							availabilityFormArray[6] = {
+												    appointmentAvailabilityDoctor: $scope.createdDoctorId,
+												    appointmentAvailabilityDoctorCity: $scope.doctorcity.cityId,
+												    appointmentAvailabilityDoctorType: $scope.doctorType.doctorTypeId,
+												    appointmentAvailabilitySlotDay: "Saturday",
+												    appointmentAvailabilitySlotTime1: ($scope.saturdaySlot1 ? true : false),
+												    appointmentAvailabilitySlotTime10: ($scope.saturdaySlot10 ? true : false),
+												    appointmentAvailabilitySlotTime11: ($scope.saturdaySlot11 ? true : false),
+												    appointmentAvailabilitySlotTime12: ($scope.saturdaySlot12 ? true : false),
+												    appointmentAvailabilitySlotTime2: ($scope.saturdaySlot2 ? true : false),
+												    appointmentAvailabilitySlotTime3: ($scope.saturdaySlot3 ? true : false),
+												    appointmentAvailabilitySlotTime4: ($scope.saturdaySlot4 ? true : false),
+												    appointmentAvailabilitySlotTime5: ($scope.saturdaySlot5 ? true : false),
+												    appointmentAvailabilitySlotTime6: ($scope.saturdaySlot6 ? true : false),
+												    appointmentAvailabilitySlotTime7: ($scope.saturdaySlot7 ? true : false),
+												    appointmentAvailabilitySlotTime8: ($scope.saturdaySlot8 ? true : false),
+												    appointmentAvailabilitySlotTime9: ($scope.saturdaySlot9 ? true : false)
+												  };
+												  
+							//alert( JSON.stringify(availabilityFormArray) );
 							var availreq = {
 									 method: 'POST',
 									 url: 'http://localhost:8888/app/cityvault/doctoruserregistration/availability',
-									 data:  JSON.stringify(availabilityForm)
+									 data:  JSON.stringify(availabilityFormArray)
 									}
-							$http(availreq)
+							 $http(availreq)
 							.then(function(response) {
 										alert("Registration Successful");
 										
 										
 									},
 									function myError(response) {
-										alert("bekar");
 										$scope.heading += response.statusText;
-									}); */
+									}); 
 									
-							window.location = "http://localhost:8888/app/appointmentbookingapp/doctordashboard";
+							location.replace("http://localhost:8888/app/");
 						},
 						function myError(response) {
-							alert("bekar");
 							$scope.heading += response.statusText;
 						});
 			};

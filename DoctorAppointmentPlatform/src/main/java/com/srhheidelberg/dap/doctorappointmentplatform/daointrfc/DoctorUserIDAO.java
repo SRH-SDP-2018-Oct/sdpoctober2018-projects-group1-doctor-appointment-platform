@@ -12,6 +12,6 @@ public interface DoctorUserIDAO {
 	DoctorUser save(DoctorUser doctorUser);
 
 	List<DoctorUser> getAvailableDoctors(Integer selectedCity, Integer selectedDoctorType, Integer selectedSlot,
-			Date selectedDate);
+			Date selectedDate, Integer patientUserId);
 
 }

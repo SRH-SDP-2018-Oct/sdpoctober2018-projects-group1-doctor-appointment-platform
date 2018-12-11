@@ -1,0 +1,141 @@
+.login-sec{
+  padding: 10px;
+}
+.login-sec button{
+  padding: 10px;
+  padding:40px;
+  position: relative;
+  left:30%;
+  margin-top:70px;
+  /* height:200px;
+  width:30%; */
+}
+.login-sec button:hover{
+  padding: 10px;
+  padding:40px;
+  position: relative;
+  left:30%;
+  margin-top:70px;
+  background-image: linear-gradient(blue, #17a2b8);
+  color: #ffffff;
+  font-weight: 700;
+}
+.header-space{
+  height:50px;
+  background: #333545;
+  padding:10px 30px;
+  color:#ffffff;
+}
+.nested-table{
+  width:100%;
+  overflow: auto;
+}
+.patient-table{
+  background:#ffffff;
+}
+.patient-table tr{
+
+}
+.patient-table tr td:{
+  display: none;
+}
+
+/* styling for  patient dashboard */
+div.upcomingappointments {
+	border-style: solid;
+	background-color: #abcdef;
+	width: 500px;
+	height: 300px;
+	overflow: scroll;
+	display: block;
+}
+
+div.previousappointments {
+	border-style: solid;
+	background-color: #a1c1e1;
+	width: 500px;
+	height: 300px;
+	overflow: scroll;
+	display: block;
+}
+
+div.searchappointments {
+	border-style: solid;
+	background-color: #abcdef;
+	width: 500px;
+	height: 300px;
+	overflow: scroll;
+	display: block;
+}
+
+div.feebackremaingappointments {
+	border-style: solid;
+	background-color: #abcdef;
+	width: 500px;
+	height: 300px;
+	overflow: scroll;
+	display: block;
+}
+
+div.patienttodayappointments {
+	border-style: solid;
+	background-color: #abcdef;
+	width: 500px;
+	height: 300px;
+	overflow: scroll;
+	display: block;
+}
+
+div.bookappointments {
+	border-style: solid;
+	background-color: #abcdef;
+	width: 500px;
+	height: 300px;
+	overflow: scroll;
+	display: block;
+}
+
+table, th, td {
+	border: 1px solid grey;
+	border-collapse: collapse;
+	padding: 5px;
+}
+
+table tr:nth-child(odd) {
+	background-color: #f1f1f1;
+}
+
+table tr:nth-child(even) {
+	background-color: #ffffff;
+}
+.patient-table{
+  background:#ffffff;
+}
+.patient-table tr{
+
+}
+.patient-table tr td:{
+}
+
+/* css for patientlogin page */
+div.solid {
+	border-style: solid;
+	background-color: #abcdef;
+	width: 20%;
+	height: 30%;
+	overflow: scroll;
+}
+
+table, th, td {
+	border: 1px solid grey;
+	border-collapse: collapse;
+	padding: 5px;
+}
+
+table tr:nth-child(odd) {
+	background-color: #f1f1f1;
+}
+
+table tr:nth-child(even) {
+	background-color: #ffffff;
+}

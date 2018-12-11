@@ -10,16 +10,16 @@ public interface AppointmentBookingIDAO {
 
 	List<AppointmentBooking> findAll();
 
-	List<AppointmentBooking> findDoctorUpcomingAppointments();
+	List<AppointmentBooking> findDoctorUpcomingAppointments(Integer doctorId);
 
-	List<AppointmentBooking> findPatientUpcomingAppointments();
+	List<AppointmentBooking> findPatientUpcomingAppointments(Integer patientUserId);
 
-	List<AppointmentBooking> findDoctorPreviousAppointments();
+	List<AppointmentBooking> findDoctorPreviousAppointments(Integer doctorId);
 
-	List<AppointmentBooking> findPatientPreviousAppointments();
+	List<AppointmentBooking> findPatientPreviousAppointments(Integer patientUserId);
 
-	List<AppointmentBooking> findDoctorAppointmentStatusRemainings();
+	List<AppointmentBooking> findDoctorAppointmentStatusRemainings(Integer doctorId);
 
-	List<AppointmentBooking> findPatientFeedbackRemainAppointments();
+	List<AppointmentBooking> findPatientFeedbackRemainAppointments(Integer patientUserId);
 	
 }

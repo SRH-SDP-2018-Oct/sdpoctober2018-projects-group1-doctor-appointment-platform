@@ -4,7 +4,7 @@ import com.srhheidelberg.dap.doctorappointmentplatform.model.GuardianUser;
 
 public interface GuardianUserIDAO {
 
-	void save(GuardianUser guardianUser);
+	GuardianUser save(GuardianUser guardianUser);
 
 	GuardianUser findById(Integer id);
 

@@ -17,6 +17,4 @@ public interface ApptAvailabilityRepository extends JpaRepository<AppointmentAva
 			@Param("appointmentAvailabilityDoctorType") int appointmentAvailabilityDoctorType,
 			@Param("appointmentAvailabilityDoctorCity") int appointmentAvailabilityDoctorCity);
 	
-	List<AppointmentAvailability> save(List<AppointmentAvailability> appointmentAvailabilities);
-
 }

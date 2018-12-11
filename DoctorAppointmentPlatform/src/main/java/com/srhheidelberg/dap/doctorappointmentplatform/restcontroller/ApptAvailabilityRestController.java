@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.srhheidelberg.dap.doctorappointmentplatform.daointrfc.AppointmentAvailabilityIDAO;
+import com.srhheidelberg.dap.doctorappointmentplatform.dao.AppointmentAvailabilityDAO;
 import com.srhheidelberg.dap.doctorappointmentplatform.model.AppointmentAvailability;
 
 @RestController
@@ -18,13 +18,13 @@ import com.srhheidelberg.dap.doctorappointmentplatform.model.AppointmentAvailabi
 public class ApptAvailabilityRestController {
 	
 	@Autowired
-	AppointmentAvailabilityIDAO appointmentAvailabilityIDAO;
+	AppointmentAvailabilityDAO appointmentAvailabilityDAO;
 	
 	//AppointmentAvailability
 	@PostMapping("/doctoruserregistration/availability")
 	public List<AppointmentAvailability> createAppointmentBooking(@Valid @RequestBody List<AppointmentAvailability> appointmentAvailabilities) {
 		System.out.println("Booking: " + appointmentAvailabilities);
-		return appointmentAvailabilityIDAO.saveForRegistration(appointmentAvailabilities);
+		return appointmentAvailabilityDAO.saveForRegistration(appointmentAvailabilities);
 	}
 
 }
