@@ -39,9 +39,9 @@
 								({{slots[upcomingappointment.appointmentBookingSlotTime-1].slotStartTime
 									}}-{{slots[upcomingappointment.appointmentBookingSlotTime-1].slotEndTime
 									}})</button></td>
-								<td>{{$scope.patientuserids[upcomingappointment.appointmentBookingSlotTime-1]
+								<td>{{patientusers[upcomingappointment.appointmentBookingSlotTime-1].patientLastName
 									}}</td>
-								<td>{{$scope.patientusers[upcomingappointment.appointmentBookingSlotTime-1]
+								<td>{{doctorusers[upcomingappointment.appointmentBookingSlotTime-1].doctorLastName
 									}}</td>
 								<td>{{upcomingappointment.appointmentBookingSlotDate}}</td>
 								<td>{{upcomingappointment.appointmentBookingStatus }}</td>
@@ -63,8 +63,10 @@
 								({{slots[previousappointment.appointmentBookingSlotTime-1].slotStartTime
 									}}-{{slots[previousappointment.appointmentBookingSlotTime-1].slotEndTime
 									}})</button></td>
-								<td>{{$scope.patientusers[0]}}</td>
-								<td>{{$scope.doctorusers[previousappointment.appointmentBookingSlotTime-1]}}</td>
+								<td>{{patientusers[previousappointment.appointmentBookingSlotTime-1].patientLastName
+									}}</td>
+								<td>{{doctorusers[previousappointment.appointmentBookingSlotTime-1].doctorLastName
+									}}</td>
 								<td>{{previousappointment.appointmentBookingSlotDate}}</td>
 								<td>{{previousappointment.appointmentBookingStatus }}</td>
 							</tr>
@@ -112,9 +114,9 @@
 								({{slots[feebackremaingappointment.appointmentBookingSlotTime-1].slotStartTime
 									}}-{{slots[feebackremaingappointment.appointmentBookingSlotTime-1].slotEndTime
 									}})</button></td>
-								<td>{{$scope.patientuserids[feebackremaingappointment.appointmentBookingSlotTime-1]
+								<td>{{patientusers[feebackremaingappointment.appointmentBookingSlotTime-1].patientLastName
 									}}</td>
-								<td>{{$scope.patientusers[feebackremaingappointment.appointmentBookingSlotTime-1]
+								<td>{{doctorusers[feebackremaingappointment.appointmentBookingSlotTime-1].doctorLastName
 									}}</td>
 								<td>{{feebackremaingappointment.appointmentBookingSlotDate}}</td>
 								<td>{{feebackremaingappointment.appointmentBookingStatus }}</td>
@@ -161,21 +163,8 @@
 						<button ng-click="closeAppointment()">Close</button>
 					</div>
 					<div class="patienttodayappointments" ng-show="isDoctor">
-						<div>
-						{{selectedDoctorId}}<br />
-						
-						Last Name: {{doctor.doctorLastName}}<br />
-						First Name: {{doctor.doctorFirstName}}<br />
-						Street: {{doctor.doctorSteetAddress}}<br />
-						Arear: {{doctor.doctorAreaAddress}}<br />
-						Postal Code: {{doctor.doctorPostalCode}}<br />
-						City: {{citynames[doctor.appointmentBookingDoctorCity-1].cityName}}<br/>
-						Email: {{doctor.doctorEmail}}<br />
-						Contact: {{doctor.doctorContact}}<br />
-						Type: {{doctortypes[doctor.appointmentBookingDoctorType].doctorTypeName}}<br />
-						Fees: {{doctor.doctorFees}}<br />
-						Experience: {{doctor.doctorExperience}}
-						</div>
+						have{{selectedDoctorId}}
+						got{{doctor.doctorUserId}}
 
 						<button ng-click="closeAppointment()">Close</button>
 					</div>
@@ -338,6 +327,7 @@
 												"http://localhost:8888/app/cityvault/patientusers")
 										.then(function(response) {
 											$scope.patientusers = response.data;
+											console.log(response.data);
 										}, function myError(response) {
 											$scope.heading += response.statusText;
 											console.log(response.statusText);
