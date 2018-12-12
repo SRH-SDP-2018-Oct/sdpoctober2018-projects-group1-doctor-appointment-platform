@@ -18,6 +18,10 @@ public class AppointmentBookingDAO implements AppointmentBookingIDAO {
 	@Autowired
 	ApptBookingRepository appointmentBookingRepository;
 
+	public void deleteAppointment(AppointmentBooking appointmentBooking) {
+		appointmentBookingRepository.delete(appointmentBooking);
+	}
+	
 	public AppointmentBooking save(AppointmentBooking appointmentBooking) {
 		return appointmentBookingRepository.save(appointmentBooking);
 	}

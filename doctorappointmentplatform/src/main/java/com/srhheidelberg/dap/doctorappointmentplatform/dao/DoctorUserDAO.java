@@ -29,6 +29,10 @@ public class DoctorUserDAO implements DoctorUserIDAO {
 	@Autowired
 	ApptAvailabilityRepository apptAvailabilityRepository;
 
+	public DoctorUser updateDoctor(DoctorUser doctorUser) {
+		return doctorUserRepository.save(doctorUser);
+	}
+	
 	@Override
 	public List<DoctorUser> findAll() {
 		return doctorUserRepository.findAll();
